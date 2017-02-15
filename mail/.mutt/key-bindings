@@ -1,0 +1,63 @@
+# Abook support
+set query_command= "abook --mutt-query '%s'"
+macro index,pager  a "<pipe-message>abook --add-email-quiet<Enter>" "add this sender to Abook"
+bind editor        <Tab> complete-query
+
+### Macros ###
+# Mbsync
+macro generic ,g "!mbsync -a<Enter>" "sync mailboxes"
+
+# Urlview support
+
+
+macro index,pager u "<enter-command> set my_pdsave=\$pipe_decode<enter>\
+          <enter-command> unset pipe_decode<enter>\
+          <pipe-message>~/.mutt/extract_url.pl -q<enter>\
+          <enter-command> set pipe_decode=\$my_pdsave<enter>" \
+          "get URLs"
+
+macro attach,compose u "<enter-command> set my_pdsave=\$pipe_decode<enter>\
+          <enter-command> unset pipe_decode<enter>\
+          <pipe-entry>~/.mutt/extract_url.pl -q<enter>\
+          <enter-command> set pipe_decode=\$my_pdsave<enter>" \
+          "get URLs"
+### Mark as Read ###
+macro index ,r "T(~N|~O)<Enter>;WO;WN;t" "mark all new/old as read"
+
+### General ###
+
+## Pager
+bind pager h previous-entry
+bind pager l next-entry
+bind pager H previous-thread
+bind pager L next-thread
+bind pager j next-line
+bind pager k previous-line
+bind pager gg top
+bind pager G bottom
+bind pager \CD half-down
+bind pager \CU half-up
+bind pager \CN sidebar-next
+bind pager \CP sidebar-prev
+bind pager \CO sidebar-open
+
+## Index
+bind index \CD half-down
+bind index \CU half-up
+bind index \CN sidebar-next
+bind index \CP sidebar-prev
+bind index \CO sidebar-open
+
+### Generic ###
+bind generic j next-entry
+bind generic k previous-entry
+bind generic gg first-entry
+bind generic G last-entry
+bind generic \CD half-down
+bind generic \CU half-up
+
+### Attachments
+bind attach gg first-entry
+bind attach G last-entry
+bind attach \CD half-down
+bind attach \CU half-up

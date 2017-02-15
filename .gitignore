@@ -1,0 +1,11 @@
+# mail package files
+mail/.mbsyncrc
+mail/.msmtprc
+mail/*/muttrc
+mail/*/mailing-lists
+mail/*/*@*
+
+# News files
+news/*/urls
+news/*/cache.db*
+news/*/history*
