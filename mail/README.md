@@ -1,4 +1,4 @@
-## Mail Dotfiles
+Mail Dotfiles
 ---
 
 Most of configurations in this dotfiles require user mail address.
