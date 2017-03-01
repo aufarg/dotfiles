@@ -7,7 +7,7 @@
 "
 "
 " ######################### vimrc index  #########################
-" 1. Vim Configurations
+" 1. Default Configurations
 " 2. Custom Functions
 " 3. Plugins
 " 4. Plugins Configurations
@@ -15,77 +15,32 @@
 " ################################################################
 
 
-" ######################### Vim Configurations #########################
-" Attempt to determine the type of a file based on its name this will make
-" sure syntax highlight got it right
-filetype indent plugin on
+" ######################### Default Configurations #########################
+filetype indent plugin on " determine the type of a file based on its name
+syntax enable " depends on filetype
 
-" Use older version of regex engine since the new one sucks hard
-set re=1
-
-" Enable omnicomplete
-set omnifunc=syntaxcomplete#Complete
-
-" Enable syntax highlighting
-syntax enable
-
-" Allow unsaved buffer to stay until vim closed because tabs sucks
-set hidden
-
-" Show currently typed commands on Vim's last line
-set showcmd
-
-" Use case insensitive search, except when using capital letters
-set ignorecase smartcase
-
-" Copy the previous indentation on autoindenting
-set copyindent
-
-" Stop certain movements from always going to the first character of a line.
-set nostartofline
-
-" Change the terminal's title
-set title
-
-" Don't use backup files with ~ and .swp, it's disgusting
-set nobackup noswapfile
-
-" Display the cursor position on the last line of the screen or in the status
-" line of a window
-set ruler
-
-" Highlight line where the current cursor is in
-set cursorline
-
-" Instead of failing a command because of unsaved changes, instead raise a
-" dialogue asking if you wish to save changed files.
-set confirm
-
-" Set the command window height to 2 lines, to avoid many cases of having to
-" "press <Enter> to continue"
-set cmdheight=2
-
-" Display line relative numbers on the left
-set relativenumber
-
-" Don't wrap lines, it's confusing
-set nowrap
-
-" Quickly time out on keycodes, but never time out on mappings
-set notimeout nottimeout
-
-" Remove scratch preview pane
-set completeopt-=preview
-
-" Default indentation settings for using 4-spaced tabs.
-set tabstop=8 shiftwidth=4 smartindent expandtab
-
-" Show some special char to mark
-set list
+set re=1 " use older version of regex engine since the new one sucks hard
+set hidden " allow unsaved buffer to stay until vim closed
+set showcmd " show currently typed commands on Vim's last line
+set ignorecase smartcase " use case insensitive search, except when using capital letters
+set copyindent " copy the previous indentation on autoindenting
+set nostartofline " stop certain movements from always going to the first character of a line
+set title " change the terminal's title
+set nobackup noswapfile " don't use backup files with ~ and .swp
+set ruler " display the cursor position on the buffer
+set cursorline " highlight line where the current cursor is in
+set confirm " raise confirmation instead failing unsaved buffer
+set cmdheight=2 " set the command window height to 2 lines
+set relativenumber " display line relative numbers on the left
+set nowrap " don't wrap lines
+set notimeout nottimeout " quickly time out on keycodes and never time out on mappings
+set completeopt-=preview " remove scratch preview pane
+set tabstop=8 shiftwidth=8 smartindent noexpandtab " default indentation settings for using 4-spaced tabs.
+set list " show some special char to mark
 
 " ######################### Custom Functions #########################
 " Initialize HTML filetype options
-function! InitHTML()
+function! HTMLInit()
     " Fix syntax coloring
     syn match htmlArg /\(\<\|-\)[a-zA-Z0-9-]\+\>/ contained
 endfunction
@@ -125,6 +80,24 @@ function! LatexBold(type, ...)
     call LatexWrapCommand('\\textbf', a:type)
 endfunction
 
+function! LatexInit()
+    nnoremap <silent> <LocalLeader>i :<C-U>set operatorfunc=LatexItalicize<CR>g@
+    vnoremap <silent> <LocalLeader>i :<C-U>call LatexItalicize(visualmode())<CR>
+    nnoremap <silent> <LocalLeader>b :<C-U>set operatorfunc=LatexBold<CR>g@
+    vnoremap <silent> <LocalLeader>b :<C-U>call LatexBold(visualmode())<CR>
+endfunction
+
+" Mutt Mail
+function! MailInit()
+    au FileType mail set textwidth=72
+    au FileType mail setlocal fo+=aw
+endfunction
+
+" Python init
+function! PythonInit()
+    setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
+endfunction
+
 " ######################### Key Mappings #########################
 " Map space to run command fast
 noremap <Space> :
@@ -141,6 +114,7 @@ let mapleader = ','
 nnoremap <Leader>rf :nohl<CR><C-l>
 
 " Map to open $MYVIMRC fast
+nnoremap <Leader>tconf :tabe $MYVIMRC<CR>
 nnoremap <Leader>vconf :vsplit $MYVIMRC<CR>
 nnoremap <Leader>sconf :split $MYVIMRC<CR>
 nnoremap <Leader>conf :e $MYVIMRC<CR>
@@ -182,17 +156,17 @@ Plug 'SirVer/ultisnips'
 
 " ##### Code #####
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'Shougo/deoplete.nvim'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'matchit.zip'
-Plug 'sukima/xmledit'
-Plug 'zah/nim.vim'
-Plug 'lervag/vimtex'
-Plug 'xolox/vim-easytags'
-Plug 'xolox/vim-misc'
-Plug 'taglist.vim'
+Plug 'Raimondi/delimitMate' " autocomplete brackets, parentheses
+Plug 'Shougo/deoplete.nvim' " autocomplete
+Plug 'tpope/vim-commentary' " comments with gc<movement>
+Plug 'tpope/vim-surround' " surround command
+Plug 'matchit.zip' " % match tag in html
+Plug 'sukima/xmledit' " edit xml
+Plug 'zah/nim.vim' " nim language syntax highlighter
+Plug 'lervag/vimtex' " latex syntax highlighter
+Plug 'xolox/vim-easytags' " exuberant ctags in vim
+Plug 'xolox/vim-misc' " necessary for xolox plugins
+Plug 'taglist.vim' " taglist browser for many different languages
 
 " ##### Misc (add-ons) #####
 Plug 'lilydjwg/colorizer'
@@ -350,52 +324,25 @@ endif
 
 " ######################### Autocommands #########################
 if has("autocmd")
-    " Syntax highlights groups
-    aug syntax_highlights
-        au!
-        au FileType html call InitHTML()
-    aug END
-
     " Auto-source files to current session after write
     aug auto_sources
-        au! 
+        au!
         au BufWritePost ~/.vim/init.vim source $MYVIMRC
         au BufWritePost ~/.config/nvim/init.vim source $MYVIMRC
     aug END
 
-    " Completion depending on filetype
-    aug completions
-        au FileType php setlocal omnifunc=phpcomplete#CompletePHP
-        au FileType css setlocal omnifunc=csscomplete#CompleteCSS
-        au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-        au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-        au FileType python setlocal omnifunc=pythoncomplete#Complete
-        au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    aug END
-
-    " Indentation depending on filetype
-    aug indentations
-        au FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
-    aug END
-
-    " Mutt Filetype (vim has muttrc syntax highlight, sadly the config doesn't
-    " have the extension required)
-    aug set_filetypes
-        au BufRead /tmp/mutt-* setlocal tw=72
+    " Filetype set based on certain rules
+    aug filetype_set
+        au!
         au BufRead ~/.mutt/* setlocal filetype=muttrc
     aug END
 
-    " Latex autocommand
-    aug latex
-        au FileType tex nnoremap <silent> <LocalLeader>i :<C-U>set operatorfunc=LatexItalicize<CR>g@
-        au FileType tex vnoremap <silent> <LocalLeader>i :<C-U>call LatexItalicize(visualmode())<CR>
-        au FileType tex nnoremap <silent> <LocalLeader>b :<C-U>set operatorfunc=LatexBold<CR>g@
-        au FileType tex vnoremap <silent> <LocalLeader>b :<C-U>call LatexBold(visualmode())<CR>
-    aug END
-
-    " Mail settings
-    aug mail
-        au FileType mail source ~/.mutt/mail-vimrc
-        au FileType mail setlocal fo+=aw
+    " Filetype initialization
+    aug filetype_init
+        au!
+        au FileType tex call LatexInit()
+        au FileType html call HTMLInit()
+        au FileType mail call MailInit()
+        au FileType python call PythonInit()
     aug END
 endif
