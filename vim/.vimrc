@@ -189,42 +189,14 @@ let g:UltiSnipsSnippetDirectories=[g:UltiSnipsSnippetsDir] + ["UltiSnips"]
 " ##### filetype plugin #####
 let g:tex_flavor = 'latex'
 
-" ##### netrw configuration #####
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0
-
-" ##### CtrlSpace configuration #####
-if &runtimepath =~ "CtrlSpace"
-	set showtabline=0
-	if executable("ag")
-		let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
-	endif
-	let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
-	let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-	let g:CtrlSpaceSaveWorkspaceOnExit = 1
-endif
-
 " ##### ctrlp configuration #####
 let g:ctrlp_extensions = ['tag']
-
-
-" ##### colorizer configuration #####
-if &runtimepath =~ "colorizer"
-	let g:colorizer_startup = 0
-endif
 
 " #### Rainbow Parentheses configuration ####
 if &runtimepath =~ "rainbow_parentheses"
 	let g:rainbow#max_level = 16
 	let g:rainbow#pairs = [['(', ')'], ['[', ']']]
-
-	" list of colors that you do not want. ANSI code or #RRGGBB
 	let g:rainbow#blacklist = [233, 234]
-	if has("autocmd")
-		aug rainbow_parentheses
-			au VimEnter * RainbowParentheses
-		aug END
-	endif
 endif
 
 " #### vim-easy-align configuration ####
