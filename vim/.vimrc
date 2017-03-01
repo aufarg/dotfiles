@@ -41,61 +41,61 @@ set list " show some special char to mark
 " ######################### Custom Functions #########################
 " Initialize HTML filetype options
 function! HTMLInit()
-    " Fix syntax coloring
-    syn match htmlArg /\(\<\|-\)[a-zA-Z0-9-]\+\>/ contained
+	" Fix syntax coloring
+	syn match htmlArg /\(\<\|-\)[a-zA-Z0-9-]\+\>/ contained
 endfunction
 
 " Latex functions
 function! LatexWrapCommand(command, type)
-    let reg = '"'
-    let sel_save = &selection
-    let &selection = 'inclusive'
-    let reg_save = getreg(reg)
-    let reg_type = getregtype(reg)
-    let ok = 1
-    if a:type == 'char'
-        silent exe 'norm! `[v`]y'
-    elseif a:type ==# 'v' || a:type ==# 'V' || a:type ==# '\<C-v>'
-        silent exe 'norm! gvy'
-    else
-        ok = 0
-        echomsg a:type.' is not supported'
-    endif
-    if ok
-        let content = getreg(reg)
-        let content_reg_type = getregtype(reg)
-        let content = substitute(content, '\(.*\)', a:command.'{\1}', '')
-        call setreg(reg, content, content_reg_type)
-        exe 'norm! gv"'.reg.'p`['
-        call setreg(reg, reg_save, reg_type)
-    endif
-    let &selection = sel_save
+	let reg = '"'
+	let sel_save = &selection
+	let &selection = 'inclusive'
+	let reg_save = getreg(reg)
+	let reg_type = getregtype(reg)
+	let ok = 1
+	if a:type == 'char'
+		silent exe 'norm! `[v`]y'
+	elseif a:type ==# 'v' || a:type ==# 'V' || a:type ==# '\<C-v>'
+		silent exe 'norm! gvy'
+	else
+		ok = 0
+		echomsg a:type.' is not supported'
+	endif
+	if ok
+		let content = getreg(reg)
+		let content_reg_type = getregtype(reg)
+		let content = substitute(content, '\(.*\)', a:command.'{\1}', '')
+		call setreg(reg, content, content_reg_type)
+		exe 'norm! gv"'.reg.'p`['
+		call setreg(reg, reg_save, reg_type)
+	endif
+	let &selection = sel_save
 endfunction
 
 function! LatexItalicize(type, ...)
-    call LatexWrapCommand('\\textit', a:type)
+	call LatexWrapCommand('\\textit', a:type)
 endfunction
 
 function! LatexBold(type, ...)
-    call LatexWrapCommand('\\textbf', a:type)
+	call LatexWrapCommand('\\textbf', a:type)
 endfunction
 
 function! LatexInit()
-    nnoremap <silent> <LocalLeader>i :<C-U>set operatorfunc=LatexItalicize<CR>g@
-    vnoremap <silent> <LocalLeader>i :<C-U>call LatexItalicize(visualmode())<CR>
-    nnoremap <silent> <LocalLeader>b :<C-U>set operatorfunc=LatexBold<CR>g@
-    vnoremap <silent> <LocalLeader>b :<C-U>call LatexBold(visualmode())<CR>
+	nnoremap <silent> <LocalLeader>i :<C-U>set operatorfunc=LatexItalicize<CR>g@
+	vnoremap <silent> <LocalLeader>i :<C-U>call LatexItalicize(visualmode())<CR>
+	nnoremap <silent> <LocalLeader>b :<C-U>set operatorfunc=LatexBold<CR>g@
+	vnoremap <silent> <LocalLeader>b :<C-U>call LatexBold(visualmode())<CR>
 endfunction
 
 " Mutt Mail
 function! MailInit()
-    au FileType mail set textwidth=72
-    au FileType mail setlocal fo+=aw
+	au FileType mail set textwidth=72
+	au FileType mail setlocal fo+=aw
 endfunction
 
 " Python init
 function! PythonInit()
-    setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
+	setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
 endfunction
 
 " ######################### Key Mappings #########################
@@ -134,8 +134,8 @@ nnoremap <A-x> <C-x>
 
 " Determine highlight group
 noremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+			\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+			\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Oops! Forgot to sudo
 cnoremap w!! w !sudo tee % > /dev/null
@@ -195,13 +195,13 @@ let g:netrw_banner = 0
 
 " ##### CtrlSpace configuration #####
 if &runtimepath =~ "CtrlSpace"
-    set showtabline=0
-    if executable("ag")
-        let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
-    endif
-    let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
-    let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-    let g:CtrlSpaceSaveWorkspaceOnExit = 1
+	set showtabline=0
+	if executable("ag")
+		let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+	endif
+	let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+	let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+	let g:CtrlSpaceSaveWorkspaceOnExit = 1
 endif
 
 " ##### ctrlp configuration #####
@@ -210,139 +210,139 @@ let g:ctrlp_extensions = ['tag']
 
 " ##### colorizer configuration #####
 if &runtimepath =~ "colorizer"
-    let g:colorizer_startup = 0
+	let g:colorizer_startup = 0
 endif
 
 " #### Rainbow Parentheses configuration ####
 if &runtimepath =~ "rainbow_parentheses"
-    let g:rainbow#max_level = 16
-    let g:rainbow#pairs = [['(', ')'], ['[', ']']]
+	let g:rainbow#max_level = 16
+	let g:rainbow#pairs = [['(', ')'], ['[', ']']]
 
-    " list of colors that you do not want. ANSI code or #RRGGBB
-    let g:rainbow#blacklist = [233, 234]
-    if has("autocmd")
-        aug rainbow_parentheses
-            au VimEnter * RainbowParentheses
-        aug END
-    endif
+	" list of colors that you do not want. ANSI code or #RRGGBB
+	let g:rainbow#blacklist = [233, 234]
+	if has("autocmd")
+		aug rainbow_parentheses
+			au VimEnter * RainbowParentheses
+		aug END
+	endif
 endif
 
 " #### vim-easy-align configuration ####
 if &runtimepath =~ "vim-easy-align"
-    " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-    vmap <Enter> <Plug>(EasyAlign)
+	" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+	vmap <Enter> <Plug>(EasyAlign)
 
-    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-    nmap ga <Plug>(EasyAlign)
+	" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+	nmap ga <Plug>(EasyAlign)
 endif
 
 " #### vim-easytags configuration ####
 if &runtimepath =~ "vim-easytags"
-    let g:easytags_async = 1
+	let g:easytags_async = 1
 endif
 
 " #### vim-easymotion configuration ####
 if &runtimepath =~ "vim-easymotion"
-    let g:EasyMotion_smartcase = 1
-    let g:EasyMotion_use_upper = 1
-    let g:EasyMotion_do_mapping = 0
-    let g:EasyMotion_keys = 'hjklyuiopnm,qweasdzxcrtfgvb;r'
+	let g:EasyMotion_smartcase = 1
+	let g:EasyMotion_use_upper = 1
+	let g:EasyMotion_do_mapping = 0
+	let g:EasyMotion_keys = 'hjklyuiopnm,qweasdzxcrtfgvb;r'
 
-    " change f and t to use easymotion
-    map f <Plug>(easymotion-fl)
-    map F <Plug>(easymotion-Fl)
-    map t <Plug>(easymotion-tl)
-    map T <Plug>(easymotion-Tl)
+	" change f and t to use easymotion
+	map f <Plug>(easymotion-fl)
+	map F <Plug>(easymotion-Fl)
+	map t <Plug>(easymotion-tl)
+	map T <Plug>(easymotion-Tl)
 
-    " change s to multi input search anywhere
-    map s <Plug>(easymotion-s2)
+	" change s to multi input search anywhere
+	map s <Plug>(easymotion-s2)
 
-    " next and prev using easy motion
-    map ; <Plug>(easymotion-next)
-    map : <Plug>(easymotion-prev)
+	" next and prev using easy motion
+	map ; <Plug>(easymotion-next)
+	map : <Plug>(easymotion-prev)
 endif
 
 " #### vim-signify configuration ####
 if &runtimepath =~ 'vim-signify'
-    let g:signify_vcs_list = [ 'git' ]
+	let g:signify_vcs_list = [ 'git' ]
 endif
 
 " ##### deoplete.nvim configuration ####
 " Use deoplete.
 if &runtimepath =~ 'deoplete.nvim'
-    if &runtimepath =~ 'supertab'
-        let g:SuperTabDefaultCompletionType = "context"
-        let g:SuperTabContextDefaultCompletionType = "<c-n>"
-    endif
-    let g:deoplete#enable_at_startup = 1
+	if &runtimepath =~ 'supertab'
+		let g:SuperTabDefaultCompletionType = "context"
+		let g:SuperTabContextDefaultCompletionType = "<c-n>"
+	endif
+	let g:deoplete#enable_at_startup = 1
 endif
 
 
 " ##### Theme configuration #####
 if &runtimepath =~ "vim-colorschemes"
-    let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-    set background=dark
-    colorscheme gruvbox
-    hi link EasyMotionTarget EasyMotionTarget2FirstDefault
-    hi gitcommitSelectedFile ctermfg=142
+	let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+	set background=dark
+	colorscheme gruvbox
+	hi link EasyMotionTarget EasyMotionTarget2FirstDefault
+	hi gitcommitSelectedFile ctermfg=142
 endif
 
 " ##### Vimtex #####
 if &runtimepath =~ "vimtex"
-    let g:vimtex_latexmk_options = '-pdf -verbose -file-line-error -synctex=1 -interaction=nonstopmode -xelatex'
-    let g:vimtex_enabled = 1
-    let g:vimtex_view_method = 'zathura'
-    let g:vimtex_latexmk_build_dir = 'build'
-    if &runtimepath =~ 'deoplete.nvim'
-        if !exists('g:deoplete#omni#input_patterns')
-            let g:deoplete#omni#input_patterns = {}
-        endif
-        let g:deoplete#omni#input_patterns.tex = '\\(?:'
-                    \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-                    \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
-                    \ . '|hyperref\s*\[[^]]*'
-                    \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-                    \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
-                    \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-                    \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
-                    \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
-                    \ .')'
+	let g:vimtex_latexmk_options = '-pdf -verbose -file-line-error -synctex=1 -interaction=nonstopmode -xelatex'
+	let g:vimtex_enabled = 1
+	let g:vimtex_view_method = 'zathura'
+	let g:vimtex_latexmk_build_dir = 'build'
+	if &runtimepath =~ 'deoplete.nvim'
+		if !exists('g:deoplete#omni#input_patterns')
+			let g:deoplete#omni#input_patterns = {}
+		endif
+		let g:deoplete#omni#input_patterns.tex = '\\(?:'
+					\ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+					\ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+					\ . '|hyperref\s*\[[^]]*'
+					\ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+					\ . '|(?:include(?:only)?|input)\s*\{[^}]*'
+					\ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+					\ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+					\ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+					\ .')'
 
-    endif
+	endif
 endif
 
 
 if &runtimepath =~ "vimwiki"
-    nmap <Leader>wls <Plug>VimwikiSplitLink
-    nmap <Leader>wlv <Plug>VimwikiVSplitLink
-    let g:vimwiki_list = [{
-                \ 'path': '~/vimwiki/',
-                \ 'template_path': '~/vimwiki/templates/',
-                \ 'template_default': 'vimwiki',
-                \ 'template_ext': '.html' }]
+	nmap <Leader>wls <Plug>VimwikiSplitLink
+	nmap <Leader>wlv <Plug>VimwikiVSplitLink
+	let g:vimwiki_list = [{
+				\ 'path': '~/vimwiki/',
+				\ 'template_path': '~/vimwiki/templates/',
+				\ 'template_default': 'vimwiki',
+				\ 'template_ext': '.html' }]
 endif
 
 " ######################### Autocommands #########################
 if has("autocmd")
-    " Auto-source files to current session after write
-    aug auto_sources
-        au!
-        au BufWritePost ~/.vim/init.vim source $MYVIMRC
-        au BufWritePost ~/.config/nvim/init.vim source $MYVIMRC
-    aug END
+	" Auto-source files to current session after write
+	aug auto_sources
+		au!
+		au BufWritePost ~/.vim/init.vim source $MYVIMRC
+		au BufWritePost ~/.config/nvim/init.vim source $MYVIMRC
+	aug END
 
-    " Filetype set based on certain rules
-    aug filetype_set
-        au!
-        au BufRead ~/.mutt/* setlocal filetype=muttrc
-    aug END
+	" Filetype set based on certain rules
+	aug filetype_set
+		au!
+		au BufRead ~/.mutt/* setlocal filetype=muttrc
+	aug END
 
-    " Filetype initialization
-    aug filetype_init
-        au!
-        au FileType tex call LatexInit()
-        au FileType html call HTMLInit()
-        au FileType mail call MailInit()
-        au FileType python call PythonInit()
-    aug END
+	" Filetype initialization
+	aug filetype_init
+		au!
+		au FileType tex call LatexInit()
+		au FileType html call HTMLInit()
+		au FileType mail call MailInit()
+		au FileType python call PythonInit()
+	aug END
 endif
