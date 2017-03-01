@@ -317,4 +317,10 @@ if has("autocmd")
 		au FileType mail call MailInit()
 		au FileType python call PythonInit()
 	aug END
+
+	" Plugins autocommand
+	aug plugins_autocommand
+		au!
+		au FileType c,c++ RainbowParentheses
+	aug END
 endif
