@@ -14,3 +14,4 @@ This dotfiles require these binary installed:
 - mbsync/isync (for offline IMAP)
 - msmtp (for SMTP)
 - abook (optional for address book)
+- urlscan (optional for opening url on browser)

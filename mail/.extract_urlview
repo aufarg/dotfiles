@@ -1,6 +1,5 @@
 SHORTCUT
 COMMAND firefox %s &
-HTML_TAGS a,iframe,link
 ALTSELECT Q
 DEFAULT_VIEW context
 RAW_RESERVED

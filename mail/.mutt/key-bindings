@@ -7,20 +7,10 @@ bind editor        <Tab> complete-query
 # Mbsync
 macro generic ,g "!mbsync -a<Enter>" "sync mailboxes"
 
-# Urlview support
+# urlscan support
 
+macro index,pager \cb <pipe-entry>'urlscan'<enter> 'Follow links with urlscan'
 
-macro index,pager u "<enter-command> set my_pdsave=\$pipe_decode<enter>\
-          <enter-command> unset pipe_decode<enter>\
-          <pipe-message>~/.mutt/extract_url.pl -q<enter>\
-          <enter-command> set pipe_decode=\$my_pdsave<enter>" \
-          "get URLs"
-
-macro attach,compose u "<enter-command> set my_pdsave=\$pipe_decode<enter>\
-          <enter-command> unset pipe_decode<enter>\
-          <pipe-entry>~/.mutt/extract_url.pl -q<enter>\
-          <enter-command> set pipe_decode=\$my_pdsave<enter>" \
-          "get URLs"
 ### Mark as Read ###
 macro index ,r "T(~N|~O)<Enter>;WO;WN;t" "mark all new/old as read"
 
