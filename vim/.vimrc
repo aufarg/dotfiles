@@ -132,7 +132,6 @@ cnoremap w!! w !sudo tee % > /dev/null
 call plug#begin('~/.config/nvim/bundle')
 
 " ##### Superb Plugins (god-like utilities) #####
-Plug 'terryma/vim-multiple-cursors'
 Plug 'easymotion/vim-easymotion'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
