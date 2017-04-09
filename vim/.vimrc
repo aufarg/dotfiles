@@ -151,8 +151,6 @@ Plug 'matchit.zip' " % match tag in html
 Plug 'sukima/xmledit' " edit xml
 Plug 'zah/nim.vim' " nim language syntax highlighter
 Plug 'lervag/vimtex' " latex syntax highlighter
-Plug 'xolox/vim-easytags' " exuberant ctags in vim
-Plug 'xolox/vim-misc' " necessary for xolox plugins
 Plug 'taglist.vim' " taglist browser for many different languages
 
 " ##### Misc (add-ons) #####
