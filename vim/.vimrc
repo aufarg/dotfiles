@@ -138,7 +138,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'rking/ag.vim'
-Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 
 " ##### Code #####
@@ -227,10 +226,6 @@ endif
 " ##### deoplete.nvim configuration ####
 " Use deoplete.
 if &runtimepath =~ 'deoplete.nvim'
-	if &runtimepath =~ 'supertab'
-		let g:SuperTabDefaultCompletionType = "context"
-		let g:SuperTabContextDefaultCompletionType = "<c-n>"
-	endif
 	let g:deoplete#enable_at_startup = 1
 endif
 
