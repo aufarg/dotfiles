@@ -102,42 +102,29 @@ endfunction
 " Map space to run command fast
 noremap <Space> :
 noremap q<Space> q:
-
-" Now we can bind ':' as inverse of ';', which is ','
 nnoremap : ,
 
-" And let ',' be mapleader, since ',' is easier than '\'
 let mapleader = ','
-
-" #### Leader Map ####
-" Map to ReFresh screen
 nnoremap <Leader>rf :nohl<CR><C-l>
-
-" Map to open $MYVIMRC fast
 nnoremap <Leader>tconf :tabe $MYVIMRC<CR>
 nnoremap <Leader>vconf :vsplit $MYVIMRC<CR>
 nnoremap <Leader>sconf :split $MYVIMRC<CR>
 nnoremap <Leader>conf :e $MYVIMRC<CR>
 
-" Easy window navigation
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Change completion trigger
 inoremap <C-Space> <C-X><C-O>
 
-" Remap number increment and decrement to alt
 nnoremap <A-a> <C-a>
 nnoremap <A-x> <C-x>
 
-" Determine highlight group
 noremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 			\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 			\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" Oops! Forgot to sudo
 cnoremap w!! w !sudo tee % > /dev/null
 
 " ######################### Plugins #########################
