@@ -143,7 +143,7 @@ Plug 'SirVer/ultisnips'
 " ##### Code #####
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'Raimondi/delimitMate' " autocomplete brackets, parentheses
-Plug 'Shougo/deoplete.nvim' " autocomplete
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
 Plug 'tpope/vim-commentary' " comments with gc<movement>
 Plug 'tpope/vim-surround' " surround command
 Plug 'matchit.zip' " % match tag in html
