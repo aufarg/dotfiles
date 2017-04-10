@@ -14,6 +14,17 @@ macro index,pager \cb <pipe-entry>'urlscan'<enter> 'Follow links with urlscan'
 ### Mark as Read ###
 macro index ,r "T(~N|~O)<Enter>;WO;WN;t" "mark all new/old as read"
 
+### Notmuch ###
+macro index <F8> \
+     "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt -o ~/Mail/notmuch --prompt search<enter><change-folder-readonly>+notmuch<enter>" \
+     "notmuch: search mail"
+macro index <F9> \
+     "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt -o ~/Mail/notmuch thread<enter><change-folder-readonly>+notmuch<enter><enter-command>set wait_key<enter>" \
+     "notmuch: reconstruct thread"
+macro index <F6> \
+     "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt tag -inbox<enter>" \
+     "notmuch: remove message from inbox"
+
 ### General ###
 
 ## Pager
