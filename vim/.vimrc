@@ -165,11 +165,12 @@ Plug 'flazz/vim-colorschemes'
 " Add plugins to &runtimepath
 call plug#end()
 
-" ######################### Plugins Configurations #########################
-" ##### netrw(?) ####
+" ######################### Builtin Tools Configurations #########################
+" ##### netrw ####
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
 
+" ######################### Plugins Configurations #########################
 " ##### UltiSnip configuration #####
 let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
 let g:UltiSnipsSnippetDirectories=[g:UltiSnipsSnippetsDir] + ["UltiSnips"]
