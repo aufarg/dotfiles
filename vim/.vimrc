@@ -135,6 +135,7 @@ call plug#begin('~/.config/nvim/bundle')
 Plug 'easymotion/vim-easymotion'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-repeat'
 Plug 'rking/ag.vim'
 Plug 'SirVer/ultisnips'
@@ -165,6 +166,10 @@ Plug 'flazz/vim-colorschemes'
 call plug#end()
 
 " ######################### Plugins Configurations #########################
+" ##### netrw(?) ####
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
+
 " ##### UltiSnip configuration #####
 let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
 let g:UltiSnipsSnippetDirectories=[g:UltiSnipsSnippetsDir] + ["UltiSnips"]
