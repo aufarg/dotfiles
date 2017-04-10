@@ -153,7 +153,6 @@ Plug 'lervag/vimtex' " latex syntax highlighter
 Plug 'taglist.vim' " taglist browser for many different languages
 
 " ##### Misc (add-ons) #####
-Plug 'lilydjwg/colorizer'
 Plug 'junegunn/vim-easy-align'
 Plug 'kshenoy/vim-signature'
 Plug 'mhinz/vim-signify'
