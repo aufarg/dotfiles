@@ -196,11 +196,6 @@ if &runtimepath =~ "vim-easy-align"
 	nmap ga <Plug>(EasyAlign)
 endif
 
-" #### vim-easytags configuration ####
-if &runtimepath =~ "vim-easytags"
-	let g:easytags_async = 1
-endif
-
 " #### vim-easymotion configuration ####
 if &runtimepath =~ "vim-easymotion"
 	let g:EasyMotion_smartcase = 1
