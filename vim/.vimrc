@@ -166,6 +166,11 @@ Plug 'flazz/vim-colorschemes'
 call plug#end()
 
 " ######################### Builtin Tools Configurations #########################
+" ##### cscope ####
+if has('cscope')
+	set cscopetag cscopeverbose
+endif
+
 " ##### netrw ####
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
