@@ -168,6 +168,9 @@ call plug#end()
 " ##### cscope ####
 if has('cscope')
 	set cscopetag cscopeverbose
+	if filereadable('cscope.out')
+		silent! cscope add cscope.out
+	endif
 endif
 
 " ##### netrw ####
