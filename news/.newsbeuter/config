@@ -11,6 +11,14 @@ text-width 80
 
 browser "firefox %u"
 
+color background          white   black
+color listnormal          white   black
+color listfocus           yellow  blue   bold
+color listnormal_unread   magenta black
+color listfocus_unread    magenta blue   bold
+color info                yellow  blue   bold
+color article             white   black
+
 bind-key j down feedlist
 bind-key k up feedlist
 bind-key j next articlelist
