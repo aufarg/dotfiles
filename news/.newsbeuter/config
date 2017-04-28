@@ -1,3 +1,4 @@
+confirm-exit yes
 auto-reload yes
 reload-time 120
 reload-threads 4
@@ -6,6 +7,7 @@ download-timeout 10
 prepopulate-query-feeds yes
 
 feed-sort-order unreadarticlecount-desc
+goto-next-feed no
 
 text-width 80
 
