@@ -9,6 +9,7 @@ notify-program notify-send
 
 feed-sort-order unreadarticlecount-desc
 goto-next-feed no
+keep-articles-days 14
 
 text-width 80
 
