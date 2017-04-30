@@ -250,11 +250,12 @@ endif
 
 " ##### Theme configuration #####
 if &runtimepath =~ "vim-colorschemes"
-	let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+	set termguicolors
 	set background=dark
+
+	let g:gruvbox_contrast_dark = "hard"
 	colorscheme gruvbox
 	hi link EasyMotionTarget EasyMotionTarget2FirstDefault
-	hi gitcommitSelectedFile ctermfg=142
 endif
 
 " ##### Vimtex #####
