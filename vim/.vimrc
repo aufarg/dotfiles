@@ -119,8 +119,8 @@ nnoremap <C-l> <C-w>l
 inoremap <C-Space> <C-X><C-O>
 
 noremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-			\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-			\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+                    \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+                    \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 cnoremap w!! w !sudo tee % > /dev/null
 
@@ -188,24 +188,24 @@ let g:netrw_winsize = 25
 " ######################### Plugins Configurations #########################
 " ##### vim-lightline #####
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"x":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '|', 'right': '|' }
-      \ }
+                  \ 'colorscheme': 'wombat',
+                  \ 'active': {
+                  \   'left': [ [ 'mode', 'paste' ],
+                  \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+                  \ },
+                  \ 'component': {
+                  \   'readonly': '%{&filetype=="help"?"":&readonly?"x":""}',
+                  \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+                  \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+                  \ },
+                  \ 'component_visible_condition': {
+                  \   'readonly': '(&filetype!="help"&& &readonly)',
+                  \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+                  \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+                  \ },
+                  \ 'separator': { 'left': '⮀', 'right': '⮂' },
+                  \ 'subseparator': { 'left': '|', 'right': '|' }
+                  \ }
 
 " ##### UltiSnip configuration #####
 let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
@@ -269,10 +269,11 @@ let g:vimtex_latexmk_build_dir = 'build'
 nmap <Leader>wls <Plug>VimwikiSplitLink
 nmap <Leader>wlv <Plug>VimwikiVSplitLink
 let g:vimwiki_list = [{
-			\ 'path': '~/vimwiki/',
-			\ 'template_path': '~/vimwiki/templates/',
-			\ 'template_default': 'vimwiki',
-			\ 'template_ext': '.html' }]
+                      \ 'path': '~/vimwiki/',
+                      \ 'template_path': '~/vimwiki/templates/',
+                      \ 'template_default': 'vimwiki',
+                      \ 'template_ext': '.html'
+                      \ }]
 
 " ######################### Autocommands #########################
 if has("autocmd")
