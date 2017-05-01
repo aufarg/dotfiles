@@ -35,7 +35,7 @@ set relativenumber " display line relative numbers on the left
 set nowrap " don't wrap lines
 set notimeout nottimeout " quickly time out on keycodes and never time out on mappings
 set completeopt-=preview " remove scratch preview pane
-set tabstop=8 shiftwidth=8 smartindent noexpandtab " default indentation settings for using 4-spaced tabs.
+set tabstop=8 shiftwidth=8 autoindent noexpandtab " default indentation settings for using 4-spaced tabs.
 set list " show some special char to mark
 
 " ######################### Custom Functions #########################
