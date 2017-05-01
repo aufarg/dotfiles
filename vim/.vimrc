@@ -157,6 +157,7 @@ Plug 'vimwiki/vimwiki'
 
 " ##### Themes #####
 Plug 'flazz/vim-colorschemes'
+Plug 'itchyny/lightline.vim'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -186,6 +187,27 @@ let g:netrw_banner = 0
 let g:netrw_winsize = 25
 
 " ######################### Plugins Configurations #########################
+" ##### vim-lightline #####
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"x":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '|', 'right': '|' }
+      \ }
+
 " ##### UltiSnip configuration #####
 let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
 let g:UltiSnipsSnippetDirectories=[g:UltiSnipsSnippetsDir] + ["UltiSnips"]
