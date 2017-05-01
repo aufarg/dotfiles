@@ -197,86 +197,61 @@ let g:tex_flavor = 'latex'
 let g:ctrlp_extensions = ['tag']
 
 " #### Rainbow Parentheses configuration ####
-if &runtimepath =~ "rainbow_parentheses"
-	let g:rainbow#max_level = 16
-	let g:rainbow#pairs = [['(', ')'], ['[', ']']]
-	let g:rainbow#blacklist = [233, 234]
-endif
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']']]
+let g:rainbow#blacklist = [233, 234]
 
 " #### vim-easy-align configuration ####
-if &runtimepath =~ "vim-easy-align"
-	" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-	vmap <Enter> <Plug>(EasyAlign)
-
-	" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-	nmap ga <Plug>(EasyAlign)
-endif
+vmap <Enter> <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " #### vim-easymotion configuration ####
-if &runtimepath =~ "vim-easymotion"
-	let g:EasyMotion_smartcase = 1
-	let g:EasyMotion_use_upper = 1
-	let g:EasyMotion_do_mapping = 0
-	let g:EasyMotion_keys = 'hjklyuiopnm,qweasdzxcrtfgvb;r'
-
-	" change f and t to use easymotion
-	map f <Plug>(easymotion-fl)
-	map F <Plug>(easymotion-Fl)
-	map t <Plug>(easymotion-tl)
-	map T <Plug>(easymotion-Tl)
-
-	" change s to multi input search anywhere
-	map s <Plug>(easymotion-s2)
-
-	" next and prev using easy motion
-	map ; <Plug>(easymotion-next)
-	map : <Plug>(easymotion-prev)
-endif
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_keys = 'hjklyuiopnm,qweasdzxcrtfgvb;r'
+map f <Plug>(easymotion-fl)
+map F <Plug>(easymotion-Fl)
+map t <Plug>(easymotion-tl)
+map T <Plug>(easymotion-Tl)
+map s <Plug>(easymotion-s2)
+map ; <Plug>(easymotion-next)
+map : <Plug>(easymotion-prev)
 
 " #### vim-signify configuration ####
-if &runtimepath =~ 'vim-signify'
-	let g:signify_vcs_list = [ 'git' ]
-endif
+let g:signify_vcs_list = [ 'git' ]
 
 " ##### deoplete.nvim configuration ####
-" Use deoplete.
-if &runtimepath =~ 'deoplete.nvim'
-	let g:deoplete#enable_at_startup = 1
-	inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-	function! s:my_cr_function() abort
-	  return deoplete#close_popup() . "\<CR>"
-	endfunction
-endif
+let g:deoplete#enable_at_startup = 1
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function() abort
+	return deoplete#close_popup() . "\<CR>"
+endfunction
 
 
 " ##### Theme configuration #####
-if &runtimepath =~ "vim-colorschemes"
-	set termguicolors
-	set background=dark
+set termguicolors
+set background=dark
 
-	let g:gruvbox_contrast_dark = "hard"
-	colorscheme gruvbox
-	hi link EasyMotionTarget EasyMotionTarget2FirstDefault
-endif
+let g:gruvbox_contrast_dark = "hard"
+colorscheme gruvbox
+hi link EasyMotionTarget EasyMotionTarget2FirstDefault
 
 " ##### Vimtex #####
-if &runtimepath =~ "vimtex"
-	let g:vimtex_latexmk_options = '-pdf -verbose -file-line-error -synctex=1 -interaction=nonstopmode -xelatex'
-	let g:vimtex_enabled = 1
-	let g:vimtex_view_method = 'zathura'
-	let g:vimtex_latexmk_build_dir = 'build'
-endif
+let g:vimtex_latexmk_options = '-pdf -verbose -file-line-error -synctex=1 -interaction=nonstopmode -xelatex'
+let g:vimtex_enabled = 1
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_latexmk_build_dir = 'build'
 
 
-if &runtimepath =~ "vimwiki"
-	nmap <Leader>wls <Plug>VimwikiSplitLink
-	nmap <Leader>wlv <Plug>VimwikiVSplitLink
-	let g:vimwiki_list = [{
-				\ 'path': '~/vimwiki/',
-				\ 'template_path': '~/vimwiki/templates/',
-				\ 'template_default': 'vimwiki',
-				\ 'template_ext': '.html' }]
-endif
+" ##### Vimwiki #####
+nmap <Leader>wls <Plug>VimwikiSplitLink
+nmap <Leader>wlv <Plug>VimwikiVSplitLink
+let g:vimwiki_list = [{
+			\ 'path': '~/vimwiki/',
+			\ 'template_path': '~/vimwiki/templates/',
+			\ 'template_default': 'vimwiki',
+			\ 'template_ext': '.html' }]
 
 " ######################### Autocommands #########################
 if has("autocmd")
