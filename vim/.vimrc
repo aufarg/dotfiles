@@ -134,7 +134,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-repeat'
-Plug 'rking/ag.vim'
 Plug 'SirVer/ultisnips'
 
 " ##### Code #####
