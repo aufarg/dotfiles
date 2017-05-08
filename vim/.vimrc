@@ -208,6 +208,7 @@ endif
 
 " ######################### Plugins Configurations #########################
 " ##### vim-lightline #####
+set noshowmode " use the one from lightline
 let g:lightline = {
                   \ 'colorscheme': 'wombat',
                   \ 'active': {
