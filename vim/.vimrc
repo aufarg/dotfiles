@@ -190,6 +190,22 @@ endif
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
 
+" ##### grep ####
+if executable('ag')
+	function! QFGrep(query)
+		let escaped_query = shellescape(a:query, 1)
+		silent execute 'grep' escaped_query
+		redraw!
+		copen
+	endfunction
+
+	let g:ag_max_match_per_file = 20
+	let &grepprg='ag --nogroup --nocolor --max-count ' . g:ag_max_match_per_file
+	command! -nargs=1 Find call QFGrep(<q-args>)
+	nnoremap <leader>/ :Find<space>
+	nnoremap <leader>* :Find <C-R><C-W><CR>
+endif
+
 " ######################### Plugins Configurations #########################
 " ##### vim-lightline #####
 let g:lightline = {
