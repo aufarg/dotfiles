@@ -328,4 +328,6 @@ if has("autocmd")
 		au!
 		au FileType c,c++ RainbowParentheses
 	aug END
+
+	source $HOME/.config/nvim/codestyle.vim
 endif
