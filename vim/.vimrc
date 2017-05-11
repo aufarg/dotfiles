@@ -305,8 +305,7 @@ if has("autocmd")
 	" Auto-source files to current session after write
 	aug auto_sources
 		au!
-		au BufWritePost ~/.vim/init.vim source $MYVIMRC
-		au BufWritePost ~/.config/nvim/init.vim source $MYVIMRC
+		au BufWritePost $MYVIMRC nested source $MYVIMRC
 	aug END
 
 	" Filetype set based on certain rules
