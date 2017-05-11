@@ -152,6 +152,7 @@ Plug 'sukima/xmledit' " edit xml
 Plug 'zah/nim.vim' " nim language syntax highlighter
 Plug 'lervag/vimtex' " latex syntax highlighter
 Plug 'vim-scripts/taglist.vim' " taglist browser for many different languages
+Plug 'ludovicchabant/vim-gutentags'
 
 " ##### Misc (add-ons) #####
 Plug 'junegunn/vim-easy-align'
@@ -213,17 +214,19 @@ let g:lightline = {
                   \ 'colorscheme': 'wombat',
                   \ 'active': {
                   \   'left': [ [ 'mode', 'paste' ],
-                  \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+                  \             [ 'filename', 'readonly', 'modified', 'fugitive',  'gutentags' ] ]
                   \ },
                   \ 'component': {
                   \   'readonly': '%{&filetype=="help"?"":&readonly?"x":""}',
                   \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-                  \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+                  \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
+		  \   'gutentags': '%{gutentags#statusline("o")}'
                   \ },
                   \ 'component_visible_condition': {
                   \   'readonly': '(&filetype!="help"&& &readonly)',
                   \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-                  \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+                  \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
+		  \   'gutentags': '(gutentags#statusline()!="")'
                   \ },
                   \ 'separator': { 'left': '⮀', 'right': '⮂' },
                   \ 'subseparator': { 'left': '|', 'right': '|' }
