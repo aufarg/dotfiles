@@ -147,11 +147,11 @@ Plug 'Raimondi/delimitMate' " autocomplete brackets, parentheses
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
 Plug 'tpope/vim-commentary' " comments with gc<movement>
 Plug 'tpope/vim-surround' " surround command
-Plug 'matchit.zip' " % match tag in html
+Plug 'vim-scripts/matchit.zip' " % match tag in html
 Plug 'sukima/xmledit' " edit xml
 Plug 'zah/nim.vim' " nim language syntax highlighter
 Plug 'lervag/vimtex' " latex syntax highlighter
-Plug 'taglist.vim' " taglist browser for many different languages
+Plug 'vim-scripts/taglist.vim' " taglist browser for many different languages
 
 " ##### Misc (add-ons) #####
 Plug 'junegunn/vim-easy-align'
