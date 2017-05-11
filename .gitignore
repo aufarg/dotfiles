@@ -9,3 +9,6 @@ mail/*/*@*
 news/*/urls
 news/*/cache.db*
 news/*/history*
+
+# Tag files
+tags
