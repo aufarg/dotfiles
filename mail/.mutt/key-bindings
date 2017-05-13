@@ -39,6 +39,9 @@ bind pager j next-line
 bind pager k previous-line
 bind pager gg top
 bind pager G bottom
+bind pager rr  reply
+bind pager rg  group-reply
+bind pager rl  list-reply
 bind pager \CD half-down
 bind pager \CU half-up
 bind pager \CN sidebar-next
@@ -46,6 +49,9 @@ bind pager \CP sidebar-prev
 bind pager \CO sidebar-open
 
 ## Index
+bind index rr  reply
+bind index rg  group-reply
+bind index rl  list-reply
 bind index \CD half-down
 bind index \CU half-up
 bind index \CN sidebar-next
