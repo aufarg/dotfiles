@@ -16,9 +16,9 @@ text-width 80
 browser "firefox %u"
 
 color background          white   black
-color listnormal          white   black
+color listnormal          white   black  bold
 color listfocus           yellow  blue   bold
-color listnormal_unread   magenta black
+color listnormal_unread   red     black  bold
 color listfocus_unread    magenta blue   bold
 color info                yellow  blue   bold
 color article             white   black
