@@ -14,6 +14,9 @@ macro index,pager \cb <pipe-entry>'urlscan'<enter> 'Follow links with urlscan'
 ### Mark as Read ###
 macro index ,r "T(~N|~O)<Enter>;WO;WN;t" "mark all new/old as read"
 
+### Remove limit ###
+macro index A  "l*<Enter>" "remove limit"
+
 ### Notmuch ###
 macro index <F8> \
      "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt -o ~/Mail/notmuch --prompt search<enter><change-folder-readonly>+notmuch<enter>" \
