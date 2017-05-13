@@ -52,6 +52,8 @@ bind pager \CO sidebar-open
 bind index rr  reply
 bind index rg  group-reply
 bind index rl  list-reply
+bind index gg  first-entry
+bind index G   last-entry
 bind index \CD half-down
 bind index \CU half-up
 bind index \CN sidebar-next
