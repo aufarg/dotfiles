@@ -194,15 +194,22 @@ let g:netrw_winsize = 25
 " ##### grep ####
 if executable('ag')
 	function! QFGrep(query)
-		let escaped_query = shellescape(a:query, 1)
-		silent execute 'grep' escaped_query
-		redraw!
-		copen
+		let matches = matchlist(a:query, "\\v('.{-1,}'|[^' ][^ ]*)( ('.{-1,}' ?|[^' ].* ?))?")
+		if len(matches) != 2
+			let search_query  = matches[1]
+			let search_root   = matches[2]
+			let escaped_search_query = shellescape(search_query, 1)
+			silent execute 'grep' escaped_search_query search_root
+			redraw!
+			copen
+		else
+			echo ":Find {pattern} [path]"
+		endif
 	endfunction
 
 	let g:ag_max_match_per_file = 20
 	let &grepprg='ag --nogroup --nocolor --max-count ' . g:ag_max_match_per_file
-	command! -nargs=1 Find call QFGrep(<q-args>)
+	command! -nargs=* Find call QFGrep(<q-args>)
 	nnoremap <leader>/ :Find<space>
 	nnoremap <leader>* :Find <C-R><C-W><CR>
 endif
