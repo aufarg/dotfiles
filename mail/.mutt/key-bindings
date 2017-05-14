@@ -4,9 +4,6 @@ macro index,pager  a "<pipe-message>abook --add-email-quiet<Enter>" "add this se
 bind editor        <Tab> complete-query
 
 ### Macros ###
-# Mbsync
-macro generic ,g "!mbsync -a<Enter>" "sync mailboxes"
-
 # urlscan support
 
 macro index,pager \cb <pipe-entry>'urlscan'<enter> 'Follow links with urlscan'
