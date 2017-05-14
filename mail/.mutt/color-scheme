@@ -7,10 +7,14 @@ color index color9 black ~O
 color index color11 black ~F
 color index black green ~T
 color index color9 black ~D
+color index brightgreen black "~v~(~N)"
+color index brightyellow black "~v~(~F~N)"
 mono index bold ~N
 mono index bold ~F
 mono index bold ~T
 mono index bold ~D
+mono index bold "~v~(~N)"
+mono index bold "~v~(~F~N)"
 
 ## Highlights inside the body of a message.
 
