@@ -89,3 +89,8 @@ color markers brightcyan black
 mono bold bold
 mono underline underline
 mono indicator reverse
+
+## sidebar color
+color sidebar_new brightcyan black
+color sidebar_highlight black color11
+mono sidebar_highlight underline
