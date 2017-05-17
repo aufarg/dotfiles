@@ -1,6 +1,6 @@
 confirm-exit yes
 auto-reload yes
-reload-time 1800
+reload-time 30
 reload-threads 4
 download-retries 4
 download-timeout 10
