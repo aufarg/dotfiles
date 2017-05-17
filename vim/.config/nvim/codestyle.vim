@@ -12,4 +12,7 @@ aug codestyle
                      \ fnamemodify($MYVIMRC, ":p:h") . '/*',
                      \ $HOME.'*/xen/*.{c,h}',
                      \ ], 'setlocal sw=4 et')
+    call s:CSFiletype([
+                     \ 'zsh',
+                     \ ], 'setlocal sw=4 et')
 aug END
