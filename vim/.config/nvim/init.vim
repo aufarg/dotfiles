@@ -33,9 +33,9 @@ set guicursor&                                              " reset to default n
 " list of rc files located in the same folder as this file ($MYVIMRC)
 " note: orders matters
 let s:rcfiles = [
+      \ 'mappings.vim',
       \ 'tools.vim',
       \ 'functions.vim',
-      \ 'mappings.vim',
       \ 'plugins.vim',
       \ 'autocommands.vim',
       \ 'codestyle.vim',
