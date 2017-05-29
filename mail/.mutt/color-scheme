@@ -72,7 +72,7 @@ color quoted7 green black
 ## Default color definitions
 #color hdrdefault color15 green
 color signature brightmagenta black
-color indicator color8 color6
+color indicator color11 color6
 color attachment black green
 color error color9 black
 color message color9 black
