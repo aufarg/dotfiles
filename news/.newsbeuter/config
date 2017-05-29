@@ -7,7 +7,7 @@ download-timeout 10
 prepopulate-query-feeds yes
 notify-program notify-send
 
-feed-sort-order unreadarticlecount-desc
+feed-sort-order unreadarticlecount-asc
 goto-next-feed no
 keep-articles-days 14
 
