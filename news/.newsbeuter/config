@@ -18,7 +18,7 @@ browser "firefox %u"
 color background          color15 black
 color listnormal          color15 black
 color listfocus           color11 blue   bold
-color listnormal_unread   color9  black  bold
+color listnormal_unread   color13 black
 color listfocus_unread    color14 blue   bold
 color info                color11 blue   bold
 color article             color15 black
