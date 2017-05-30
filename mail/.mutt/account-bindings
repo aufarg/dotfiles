@@ -1,0 +1,5 @@
+# Mbsync
+macro generic ,g "!mbsync $my_mbsyncch<Enter>" "sync mailboxes"
+
+### Archive messages ###
+macro index S "<tag-pattern>~R !~D !~F<enter><tag-prefix><save-message>+$my_accfolder/[Gmail]/All<enter>" "Archive"
