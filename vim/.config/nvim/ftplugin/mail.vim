@@ -1,1 +1,1 @@
-    setlocal textwidth=72 fo+=aw
+setlocal textwidth=72 fo+=aw
