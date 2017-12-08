@@ -29,12 +29,12 @@ nnoremap <Leader>vconf :vsplit $MYVIMRC<CR>
 nnoremap <Leader>sconf :split $MYVIMRC<CR>
 nnoremap <Leader>conf :e $MYVIMRC<CR>
 
+inoremap <C-Space> <C-X><C-O>
+
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-inoremap <C-Space> <C-X><C-O>
 
 tnoremap <Esc> <C-\><C-n>
 tnoremap <A-h> <C-\><C-n><C-w>h
