@@ -15,15 +15,25 @@ macro index ,r "T(~(~N)|~(~O))<Enter>;WO;WN;t" "mark all new/old as read"
 macro index A  "l*<Enter>" "remove limit"
 
 ### Notmuch ###
-macro index <F8> \
-     "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt -o ~/Mail/notmuch --prompt search<enter><change-folder-readonly>+notmuch<enter>" \
-     "notmuch: search mail"
-macro index <F9> \
-     "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt -o ~/Mail/notmuch thread<enter><change-folder-readonly>+notmuch<enter><enter-command>set wait_key<enter>" \
-     "notmuch: reconstruct thread"
-macro index <F6> \
-     "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt tag -inbox<enter>" \
-     "notmuch: remove message from inbox"
+macro index <F8> "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+                 <shell-escape>notmuch-mutt -r --prompt search<enter>\
+                 <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+                 <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>"\
+                 "notmuch: search mail"
+
+macro index <F9> "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+                 <pipe-message>notmuch-mutt -r thread<enter>\
+                 <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+                 <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>"\
+                 "notmuch: reconstruct thread"
+
+macro index <F6> "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+                 <pipe-message>notmuch-mutt tag -- -inbox<enter>\
+                 <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>"\
+                 "notmuch: remove message from inbox"
+
+macro index . "<change-folder>-<enter>" \
+              "return to last folder"
 
 ### General ###
 
