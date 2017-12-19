@@ -87,6 +87,8 @@ call denite#custom#var('grep', 'final_opts', [])
 call denite#custom#option('default', 'prompt', '>')
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
+call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplitswitch>', 'noremap')
+call denite#custom#map('insert', '<C-s>', '<denite:do_action:splitswitch>', 'noremap')
 nnoremap <leader>/ :Denite -updatetime=10 -no-empty grep<cr>
 
 " #### Rainbow Parentheses configuration ####
