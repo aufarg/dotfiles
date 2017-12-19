@@ -70,9 +70,6 @@ let g:lightline = {
 let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
 let g:UltiSnipsSnippetDirectories=[g:UltiSnipsSnippetsDir] + ["UltiSnips"]
 
-" ##### filetype plugin #####
-let g:tex_flavor = 'latex'
-
 " ##### denite configuration #####
 call denite#custom#var('file_rec', 'command',
             \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
@@ -152,6 +149,7 @@ colorscheme gruvbox
 hi link EasyMotionTarget EasyMotionTarget2FirstDefault
 
 " ##### Vimtex #####
+let g:tex_flavor = 'latex'
 let g:vimtex_compiler_latexmk = {
     \ 'backend' : 'nvim',
     \ 'background' : 1,
