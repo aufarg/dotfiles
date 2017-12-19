@@ -32,6 +32,9 @@ macro index <F6> "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wai
                  <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>"\
                  "notmuch: remove message from inbox"
 
+macro index <F5> "<shell-escape>notmuch new<enter>" \
+                 "notmuch: update database"
+
 macro index . "<change-folder>-<enter>" \
               "return to last folder"
 
