@@ -174,6 +174,10 @@ let g:vimtex_compiler_latexmk = {
 let g:vimtex_enabled = 1
 let g:vimtex_view_method = 'zathura'
 
+nmap <localleader>i <plug>(tex-iwrap-n)
+nmap <localleader>b <plug>(tex-bwrap-n)
+vmap <localleader>i <plug>(tex-iwrap-v)
+vmap <localleader>b <plug>(tex-bwrap-v)
 
 " ##### Vimwiki #####
 nmap <Leader>wls <Plug>VimwikiSplitLink
