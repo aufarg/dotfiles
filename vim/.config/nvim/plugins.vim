@@ -2,9 +2,11 @@
 call plug#begin('~/.config/nvim/bundle')
 
 " ##### completion #####
+" c/c++/objc
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
 Plug 'zchee/deoplete-clang' " deoplete source for C/C++
 Plug 'Shougo/neoinclude.vim' " source from included file (C/C++)
+" python
 Plug 'zchee/deoplete-jedi' " deoplete source for Python
 
 " #### ftplugins ####
