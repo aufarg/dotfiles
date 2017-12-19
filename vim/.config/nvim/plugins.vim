@@ -18,7 +18,7 @@ Plug 'ludovicchabant/vim-gutentags' " auto (re)generate ctag file
 Plug 'junegunn/rainbow_parentheses.vim' " colorize parentheses
 Plug 'Raimondi/delimitMate' " autocomplete brackets, parentheses
 Plug 'vim-scripts/matchit.zip' " % match tag in html
-Plug 'vim-scripts/taglist.vim' " taglist browser for many different languages
+Plug 'majutsushi/tagbar' " taglist browser for many different languages
 Plug 'sukima/xmledit' " edit xml
 Plug 'tpope/vim-commentary' " comments with gc<movement>
 Plug 'tpope/vim-surround' " surround command
@@ -183,3 +183,7 @@ let g:vimwiki_list = [{
             \ 'template_default': 'vimwiki',
             \ 'template_ext': '.html'
             \ }]
+
+" ##### Tagbar #####
+let g:tagbar_left = 1
+nnoremap <silent> <F9> :TagbarToggle<CR>
