@@ -62,8 +62,8 @@ let g:lightline = {
             \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
             \   'gutentags': '(gutentags#statusline()!="")'
             \ },
-            \ 'separator': { 'left': '⮀', 'right': '⮂' },
-            \ 'subseparator': { 'left': '|', 'right': '|' }
+            \ 'separator': { 'left': '', 'right': '' },
+            \ 'subseparator': { 'left': '', 'right': '' }
             \ }
 
 " ##### UltiSnip configuration #####
