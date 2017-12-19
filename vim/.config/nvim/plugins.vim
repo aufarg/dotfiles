@@ -71,9 +71,12 @@ let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
 let g:UltiSnipsSnippetDirectories=[g:UltiSnipsSnippetsDir] + ["UltiSnips"]
 
 " ##### denite configuration #####
+" ctrl-p like
 call denite#custom#var('file_rec', 'command',
             \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+nnoremap <c-p> :Denite file_rec -updatetime=10<cr>
 
+" vimgrep
 call denite#custom#var('grep', 'command', ['ag'])
 call denite#custom#var('grep', 'default_opts',
             \ ['-i', '--vimgrep', '--nocolor', '-o'])
@@ -84,7 +87,6 @@ call denite#custom#var('grep', 'final_opts', [])
 call denite#custom#option('default', 'prompt', '>')
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
-nnoremap <c-p> :Denite file_rec -updatetime=10<cr>
 nnoremap <leader>/ :Denite -updatetime=10 -no-empty grep<cr>
 
 " #### Rainbow Parentheses configuration ####
