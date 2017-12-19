@@ -8,8 +8,8 @@ Plug 'Shougo/neoinclude.vim' " source from included file (C/C++)
 Plug 'zchee/deoplete-jedi' " deoplete source for Python
 
 " #### ftplugins ####
-Plug 'zah/nim.vim' " nim ftplugin
 Plug 'lervag/vimtex' " latex syntax highlighter
+Plug 'sheerun/vim-polyglot'
 
 " #### code ####
 Plug 'ludovicchabant/vim-gutentags' " auto (re)generate ctag file
