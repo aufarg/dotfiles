@@ -17,7 +17,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'ludovicchabant/vim-gutentags' " auto (re)generate ctag file
 Plug 'junegunn/rainbow_parentheses.vim' " colorize parentheses
 Plug 'Raimondi/delimitMate' " autocomplete brackets, parentheses
-Plug 'vim-scripts/matchit.zip' " % match tag in html
 Plug 'majutsushi/tagbar' " taglist browser for many different languages
 Plug 'sukima/xmledit' " edit xml
 Plug 'tpope/vim-commentary' " comments with gc<movement>
