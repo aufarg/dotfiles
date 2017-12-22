@@ -23,7 +23,7 @@ noremap <Space> :
 nnoremap : ,
 
 let mapleader = ','
-nnoremap <Leader>rf :nohl<CR><C-l>
+nnoremap <Leader>l :nohl<CR><C-l>
 nnoremap <Leader>tconf :tabe $MYVIMRC<CR>
 nnoremap <Leader>vconf :vsplit $MYVIMRC<CR>
 nnoremap <Leader>sconf :split $MYVIMRC<CR>
