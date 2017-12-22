@@ -144,6 +144,8 @@ let g:deoplete#omni#input_patterns.tex = '\\(?:'
             \ . '|\w*'
             \ .')'
 
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+
 " ##### Theme configuration #####
 set termguicolors
 set background=dark
