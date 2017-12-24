@@ -25,7 +25,6 @@ Plug 'tpope/vim-surround' " surround command
 " ##### utilities #####
 Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-signify'
-Plug 'vimwiki/vimwiki'
 Plug 'Shougo/denite.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'junegunn/vim-easy-align'
@@ -181,16 +180,6 @@ nmap <localleader>i <plug>(tex-iwrap-n)
 nmap <localleader>b <plug>(tex-bwrap-n)
 vmap <localleader>i <plug>(tex-iwrap-v)
 vmap <localleader>b <plug>(tex-bwrap-v)
-
-" ##### Vimwiki #####
-nmap <Leader>wls <Plug>VimwikiSplitLink
-nmap <Leader>wlv <Plug>VimwikiVSplitLink
-let g:vimwiki_list = [{
-            \ 'path': '~/vimwiki/',
-            \ 'template_path': '~/vimwiki/templates/',
-            \ 'template_default': 'vimwiki',
-            \ 'template_ext': '.html'
-            \ }]
 
 " ##### Tagbar #####
 let g:tagbar_left = 1
