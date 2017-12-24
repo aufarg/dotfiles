@@ -67,7 +67,7 @@ let g:lightline = {
 
 " ##### UltiSnip configuration #####
 let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
-let g:UltiSnipsSnippetDirectories=[g:UltiSnipsSnippetsDir] + ["UltiSnips"]
+let g:UltiSnipsSnippetDirectories=[g:UltiSnipsSnippetsDir] + ['UltiSnips']
 
 " ##### denite configuration #####
 " ctrl-p like
@@ -151,7 +151,7 @@ call deoplete#custom#source('clang', 'rank', 1000)
 set termguicolors
 set background=dark
 
-let g:gruvbox_contrast_dark = "hard"
+let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 hi link EasyMotionTarget EasyMotionTarget2FirstDefault
 
