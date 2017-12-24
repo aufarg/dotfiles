@@ -13,6 +13,7 @@ Plug 'zchee/deoplete-jedi' " deoplete source for Python
 Plug 'sheerun/vim-polyglot'
 
 " #### code ####
+Plug 'neomake/neomake'
 Plug 'ludovicchabant/vim-gutentags' " auto (re)generate ctag file
 Plug 'junegunn/rainbow_parentheses.vim' " colorize parentheses
 Plug 'Raimondi/delimitMate' " autocomplete brackets, parentheses
@@ -30,7 +31,6 @@ Plug 'SirVer/ultisnips'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-dispatch'
 Plug 'lervag/vimtex' " latex syntax highlighter
 
 " ##### themes #####
