@@ -10,7 +10,6 @@ Plug 'Shougo/neoinclude.vim' " source from included file (C/C++)
 Plug 'zchee/deoplete-jedi' " deoplete source for Python
 
 " #### ftplugins ####
-Plug 'lervag/vimtex' " latex syntax highlighter
 Plug 'sheerun/vim-polyglot'
 
 " #### code ####
@@ -32,6 +31,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dispatch'
+Plug 'lervag/vimtex' " latex syntax highlighter
 
 " ##### themes #####
 Plug 'flazz/vim-colorschemes'
