@@ -1,18 +1,18 @@
-" vim-plug configuration 
+" vim-plug
 call plug#begin('~/.config/nvim/bundle')
 
-" ##### completion #####
-" c/c++/objc
+" c/c++/objc completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
 Plug 'zchee/deoplete-clang' " deoplete source for C/C++
 Plug 'Shougo/neoinclude.vim' " source from included file (C/C++)
-" python
+
+" python completion
 Plug 'zchee/deoplete-jedi' " deoplete source for Python
 
-" #### ftplugins ####
+" ftplugins
 Plug 'sheerun/vim-polyglot'
 
-" #### code ####
+" code
 Plug 'neomake/neomake'
 Plug 'ludovicchabant/vim-gutentags' " auto (re)generate ctag file
 Plug 'junegunn/rainbow_parentheses.vim' " colorize parentheses
@@ -22,7 +22,7 @@ Plug 'sukima/xmledit' " edit xml
 Plug 'tpope/vim-commentary' " comments with gc<movement>
 Plug 'tpope/vim-surround' " surround command
 
-" ##### utilities #####
+" utility
 Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-signify'
 Plug 'Shougo/denite.nvim'
@@ -32,15 +32,15 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-repeat'
 Plug 'lervag/vimtex' " latex syntax highlighter
 
-" ##### themes #####
+" themes
 Plug 'flazz/vim-colorschemes'
 Plug 'itchyny/lightline.vim'
 
 " Add plugins to &runtimepath
 call plug#end()
 
-" ######################### Plugins Configurations #########################
-" ##### vim-lightline #####
+" Plugins Configurations
+" vim-lightline
 set noshowmode " use the one from lightline
 let g:lightline = {
             \ 'colorscheme': 'wombat',
@@ -64,11 +64,11 @@ let g:lightline = {
             \ 'subseparator': { 'left': '', 'right': '' }
             \ }
 
-" ##### UltiSnip configuration #####
+" UltiSnip configuration
 let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
 let g:UltiSnipsSnippetDirectories=[g:UltiSnipsSnippetsDir] + ['UltiSnips']
 
-" ##### denite configuration #####
+" denite configuration
 " ctrl-p like
 call denite#custom#var('file_rec', 'command',
             \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
@@ -89,16 +89,16 @@ call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplitswitch>', 'no
 call denite#custom#map('insert', '<C-s>', '<denite:do_action:splitswitch>', 'noremap')
 nnoremap <leader>/ :Denite -updatetime=10 -no-empty grep<cr>
 
-" #### Rainbow Parentheses configuration ####
+" Rainbow Parentheses configuration
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 let g:rainbow#blacklist = [233, 234]
 
-" #### vim-easy-align configuration ####
+" vim-easy-align configuration
 vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" #### vim-easymotion configuration ####
+" vim-easymotion configuration
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_upper = 1
 let g:EasyMotion_do_mapping = 0
@@ -111,10 +111,10 @@ map s <Plug>(easymotion-s2)
 map ; <Plug>(easymotion-next)
 map : <Plug>(easymotion-prev)
 
-" #### vim-signify configuration ####
+" vim-signify configuration
 let g:signify_vcs_list = [ 'git' ]
 
-" ##### deoplete.nvim configuration ####
+" deoplete.nvim configuration
 let g:deoplete#enable_at_startup = 1
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
@@ -145,7 +145,7 @@ let g:deoplete#omni#input_patterns.tex = '\\(?:'
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 call deoplete#custom#source('clang', 'rank', 1000)
 
-" ##### Theme configuration #####
+" Theme configuration
 set termguicolors
 set background=dark
 
@@ -153,7 +153,7 @@ let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 hi link EasyMotionTarget EasyMotionTarget2FirstDefault
 
-" ##### Vimtex #####
+" Vimtex
 let g:tex_flavor = 'latex'
 let g:vimtex_compiler_latexmk = {
     \ 'backend' : 'nvim',
@@ -180,7 +180,7 @@ nmap <localleader>b <plug>(tex-bwrap-n)
 vmap <localleader>i <plug>(tex-iwrap-v)
 vmap <localleader>b <plug>(tex-bwrap-v)
 
-" ##### Tagbar #####
+" Tagbar
 let g:tagbar_left = 1
 nnoremap <silent> <F9> :TagbarToggle<CR>
 
