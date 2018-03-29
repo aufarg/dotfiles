@@ -1,0 +1,30 @@
+snippet env "\begin{env}\end{env}"
+\\begin{${1:env}}
+$0
+\\end{$1}
+endsnippet
+
+snippet cmd "\[cmd]{text}"
+\\${1:cmd}{${2:text}}$0
+endsnippet
+
+snippet bold "\textbf{text}"
+\\textbf{${1:text}}$0
+endsnippet
+
+snippet ital "\textit{text}"
+\\textit{${1:text}}$0
+endsnippet
+
+snippet cite "\citep[caption]{key}"
+\\citep[${1:caption}]{${2:key}}$0
+endsnippet
+
+snippet figure "\begin{figure}\end{figure}"
+\\begin{figure}[htbp]
+    \includegraphics[scale=${1:scale}]{${2:image_path}}
+    \caption{${3:caption}}
+    \label{figure:${4:label}}
+\\end{figure}
+$0
+endsnippet

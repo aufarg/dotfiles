@@ -1,0 +1,13 @@
+snippet pwntools
+### template start
+import sys
+from pwn import *
+
+context.arch = "${1:binary architecture}"
+context.os = "${2:operating system}"
+
+def debug(p):
+    if (len(sys.argv) > 1 and sys.argv[1] == "debug"):
+        util.proc.wait_for_debugger(util.proc.pidof(p)[0])
+### end of template
+endsnippet
