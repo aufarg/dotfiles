@@ -1,6 +1,5 @@
 e cfg.fortunes = false
 e asm.linesright = true
-e stack.anotated = true
 
 e scr.color = 3
 eco zenburn
