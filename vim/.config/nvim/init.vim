@@ -24,6 +24,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " code
 Plug 'neomake/neomake'
+Plug 'sbdchd/neoformat'
 Plug 'ludovicchabant/vim-gutentags' " auto (re)generate ctag file
 Plug 'junegunn/rainbow_parentheses.vim' " colorize parentheses
 Plug 'Raimondi/delimitMate' " autocomplete brackets, parentheses
@@ -74,6 +75,11 @@ let g:lightline = {
             \ 'separator': { 'left': '', 'right': '' },
             \ 'subseparator': { 'left': '', 'right': '' }
             \ }
+
+" neoformat
+augroup neoformat
+    autocmd!
+augroup END
 
 " UltiSnip configuration
 let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
