@@ -1,0 +1,13 @@
+[user]
+	name = Aufar Gilbran
+	email = aufargilbran@gmail.com
+[mergetool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+[merge]
+	tool = nvimdiff
+[difftool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+[diff]
+	tool = nvimdiff
+[include]
+	path = ~/.gitconfig.d/local-config
