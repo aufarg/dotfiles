@@ -43,6 +43,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-repeat'
 Plug 'lervag/vimtex' " latex syntax highlighter
+Plug 'airblade/vim-rooter'
 
 " themes
 Plug 'flazz/vim-colorschemes'
@@ -204,6 +205,8 @@ vmap <localleader>b <plug>(tex-bwrap-v)
 let g:tagbar_left = 1
 nnoremap <silent> <F9> :TagbarToggle<CR>
 
+" vim-rooter
+let g:rooter_manual_only = 1
 
 if has('cscope')
 	set cscopetag
