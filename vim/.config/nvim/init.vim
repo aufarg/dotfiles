@@ -1,5 +1,6 @@
 " vim-plug
 call plug#begin('~/.config/nvim/bundle')
+Plug 'junegunn/vim-plug'
 
 " c/c++/objc completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
