@@ -242,12 +242,12 @@ noremap <Space> :
 nnoremap : ,
 
 nnoremap <Leader>l :nohl<CR><C-l>
-nnoremap <Leader>tconf :tabe $MYVIMRC<CR>
-nnoremap <Leader>vconf :vsplit $MYVIMRC<CR>
-nnoremap <Leader>sconf :split $MYVIMRC<CR>
-nnoremap <Leader>conf :e $MYVIMRC<CR>
 
 inoremap <C-Space> <C-X><C-O>
+nnoremap <Leader>st :tabe $MYVIMRC<CR>
+nnoremap <Leader>sv :vsplit $MYVIMRC<CR>
+nnoremap <Leader>ss :split $MYVIMRC<CR>
+nnoremap <Leader>se :e $MYVIMRC<CR>
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
