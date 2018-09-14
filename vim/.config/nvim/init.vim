@@ -29,6 +29,7 @@ Plug 'mhinz/vim-signify'
 Plug 'Shougo/denite.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-repeat'
 Plug 'lervag/vimtex' " latex syntax highlighter
