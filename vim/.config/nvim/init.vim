@@ -54,13 +54,13 @@ let g:lightline = {
             \   'readonly': '%{&filetype=="help"?"":&readonly?"x":""}',
             \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
             \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-            \   'gutentags': '%{gutentags#statusline("o")}'
+            \   'gutentags': '%{exists("*gutentags#statusline") ? gutentags#statusline("o") : ""}'
             \ },
             \ 'component_visible_condition': {
             \   'readonly': '(&filetype!="help"&& &readonly)',
             \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
             \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
-            \   'gutentags': '(gutentags#statusline()!="")'
+            \   'gutentags': '(exists("*gutentags#statusline") && gutentags#statusline()!="")'
             \ },
             \ 'separator': { 'left': '', 'right': '' },
             \ 'subseparator': { 'left': '', 'right': '' }
