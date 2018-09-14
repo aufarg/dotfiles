@@ -9,6 +9,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
 Plug 'zchee/deoplete-clang' " deoplete source for C/C++
 Plug 'Shougo/neoinclude.vim' " source from included file (C/C++)
 
+" haskell completion
+Plug 'eagletmt/neco-ghc'
+
 " python completion
 Plug 'zchee/deoplete-jedi' " deoplete source for Python
 
