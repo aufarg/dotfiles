@@ -145,6 +145,9 @@ let g:deoplete#omni#input_patterns.tex = '\\(?:'
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 call deoplete#custom#source('clang', 'rank', 1000)
 
+" gutentags
+let g:gutentags_cache_dir = '~/.cache/vim-gutentags'
+
 " Theme configuration
 set termguicolors
 set background=dark
