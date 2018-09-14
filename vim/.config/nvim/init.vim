@@ -17,6 +17,9 @@ Plug 'zchee/deoplete-jedi' " deoplete source for Python
 
 " ftplugins
 Plug 'sheerun/vim-polyglot'
+" go completion
+Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " code
 Plug 'neomake/neomake'
