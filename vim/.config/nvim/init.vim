@@ -53,6 +53,11 @@ Plug 'itchyny/lightline.vim'
 call plug#end()
 
 " Plugins Configurations
+" vim-plug
+nnoremap <Leader>pu :PlugUpdate<CR>
+nnoremap <Leader>pU :PlugUpgrade<CR>
+nnoremap <Leader>pc :PlugClean<CR>
+nnoremap <Leader>pi :PlugInstall<CR>
 
 " neoformat
 augroup neoformat
