@@ -53,29 +53,6 @@ Plug 'itchyny/lightline.vim'
 call plug#end()
 
 " Plugins Configurations
-" vim-lightline
-set noshowmode " use the one from lightline
-let g:lightline = {
-            \ 'colorscheme': 'wombat',
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'filename', 'readonly', 'modified', 'fugitive',  'gutentags' ] ]
-            \ },
-            \ 'component': {
-            \   'readonly': '%{&filetype=="help"?"":&readonly?"x":""}',
-            \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-            \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-            \   'gutentags': '%{exists("*gutentags#statusline") ? gutentags#statusline("o") : ""}'
-            \ },
-            \ 'component_visible_condition': {
-            \   'readonly': '(&filetype!="help"&& &readonly)',
-            \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-            \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
-            \   'gutentags': '(exists("*gutentags#statusline") && gutentags#statusline()!="")'
-            \ },
-            \ 'separator': { 'left': '', 'right': '' },
-            \ 'subseparator': { 'left': '', 'right': '' }
-            \ }
 
 " neoformat
 augroup neoformat
@@ -207,6 +184,39 @@ nnoremap <silent> <F9> :TagbarToggle<CR>
 
 " vim-rooter
 let g:rooter_manual_only = 1
+
+" vim-lightline
+set noshowmode " use the one from lightline
+let g:lightline = {
+            \ 'enable': {
+            \   'statusline': 1,
+            \   'tabline': 0,
+            \ },
+            \ 'colorscheme': 'wombat',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'filename', 'readonly', 'modified', 'fugitive',  'gutentags' ] ],
+            \ },
+            \ 'component': {
+            \   'readonly': '%{&filetype=="help"?"":&readonly?"x":""}',
+            \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+            \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
+            \ },
+            \ 'component_expand': {
+            \   'gutentags': 'gutentags#statusline'
+            \ },
+            \ 'component_visible_condition': {
+            \   'readonly': '(&filetype!="help"&& &readonly)',
+            \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+            \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
+            \   'gutentags': '(exists("*gutentags#statusline") && gutentags#statusline() != "")',
+            \ },
+            \ 'component_type': {
+            \   'gutentags': 'warning',
+            \ },
+            \ 'separator': { 'left': '', 'right': '' },
+            \ 'subseparator': { 'left': '', 'right': '' },
+            \ }
 
 if has('cscope')
 	set cscopetag
