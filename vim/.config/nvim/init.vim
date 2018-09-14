@@ -1,3 +1,5 @@
+let mapleader = ','
+
 " vim-plug
 call plug#begin('~/.cache/nvim-plugins')
 Plug 'junegunn/vim-plug'
@@ -239,7 +241,6 @@ set conceallevel=1        " conceal text with appropriate conceal characeter
 noremap <Space> :
 nnoremap : ,
 
-let mapleader = ','
 nnoremap <Leader>l :nohl<CR><C-l>
 nnoremap <Leader>tconf :tabe $MYVIMRC<CR>
 nnoremap <Leader>vconf :vsplit $MYVIMRC<CR>
