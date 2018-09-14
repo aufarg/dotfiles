@@ -1,5 +1,5 @@
 " vim-plug
-call plug#begin('~/.config/nvim/bundle')
+call plug#begin('~/.cache/nvim-plugins')
 Plug 'junegunn/vim-plug'
 
 " c/c++/objc completion
