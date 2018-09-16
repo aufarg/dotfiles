@@ -218,6 +218,12 @@ let g:lightline = {
             \ 'subseparator': { 'left': '', 'right': '' },
             \ }
 
+augroup lightline_update
+    autocmd!
+    autocmd User GutentagsUpdating call lightline#update()
+    autocmd User GutentagsUpdated call lightline#update()
+augroup END
+
 if has('cscope')
 	set cscopetag
 	set nocscopeverbose
