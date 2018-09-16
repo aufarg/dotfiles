@@ -274,8 +274,6 @@ noremap <Space> :
 nnoremap : ,
 
 nnoremap <Leader>l :nohl<CR><C-l>
-
-inoremap <C-Space> <C-X><C-O>
 nnoremap <Leader>st :tabe $MYVIMRC<CR>
 nnoremap <Leader>sv :vsplit $MYVIMRC<CR>
 nnoremap <Leader>ss :split $MYVIMRC<CR>
