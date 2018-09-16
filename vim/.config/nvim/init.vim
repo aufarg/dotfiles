@@ -6,7 +6,6 @@ Plug 'junegunn/vim-plug'
 
 " c/c++/objc completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
-Plug 'zchee/deoplete-clang' " deoplete source for C/C++
 Plug 'Shougo/neoinclude.vim' " source from included file (C/C++)
 
 " haskell completion
@@ -122,10 +121,6 @@ function! s:my_cr_function() abort
     return deoplete#close_popup() . "\<CR>"
 endfunction
 
-let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header = '/Library/Developer/CommandLineTools/usr/lib/clang/'
-let g:deoplete#sources#clang#sort_algo = 'priority'
-
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
 endif
@@ -144,7 +139,6 @@ let g:deoplete#omni#input_patterns.tex = '\\(?:'
             \ .')'
 
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
-call deoplete#custom#source('clang', 'rank', 1000)
 
 " gutentags
 let g:gutentags_cache_dir = '~/.cache/vim-gutentags'
