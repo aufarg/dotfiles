@@ -268,6 +268,7 @@ set notimeout nottimeout  " no time out on keycodes and mappings
 set list                  " show some special char to mark
 set guicursor&            " reset to default neovim value (somehow it was set to nothing by default on st)
 set conceallevel=1        " conceal text with appropriate conceal characeter
+set shortmess+=c
 
 " map space to run command fast
 noremap <Space> :
