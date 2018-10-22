@@ -15,8 +15,6 @@ Plug 'eagletmt/neco-ghc'
 Plug 'zchee/deoplete-jedi' " deoplete source for Python
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' } " semantic syntax highlight
 
-" ftplugins
-Plug 'sheerun/vim-polyglot'
 " go completion
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
