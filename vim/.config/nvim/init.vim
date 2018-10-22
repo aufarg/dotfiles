@@ -118,23 +118,9 @@ inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
     return deoplete#close_popup() . "\<CR>"
 endfunction
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni#input_patterns = {}
 
-if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-endif
-let g:deoplete#omni#input_patterns.tex = '\\(?:'
-            \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-            \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
-            \ . '|hyperref\s*\[[^]]*'
-            \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-            \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
-            \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-            \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
-            \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
-            \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
-            \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
-            \ . '|\w*'
-            \ .')'
 
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 
@@ -152,21 +138,21 @@ hi link EasyMotionTarget EasyMotionTarget2FirstDefault
 " Vimtex
 let g:tex_flavor = 'latex'
 let g:vimtex_compiler_latexmk = {
-    \ 'backend' : 'nvim',
-    \ 'background' : 1,
-    \ 'build_dir' : 'build',
-    \ 'callback' : 1,
-    \ 'continuous' : 1,
-    \ 'executable' : 'latexmk',
-    \ 'options' : [
-    \   '-pdf',
-    \   '-shell-escape',
-    \   '-verbose',
-    \   '-file-line-error',
-    \   '-synctex=1',
-    \   '-interaction=nonstopmode',
-    \ ],
-\}
+            \ 'backend' : 'nvim',
+            \ 'background' : 1,
+            \ 'build_dir' : 'build',
+            \ 'callback' : 1,
+            \ 'continuous' : 1,
+            \ 'executable' : 'latexmk',
+            \ 'options' : [
+            \   '-pdf',
+            \   '-shell-escape',
+            \   '-verbose',
+            \   '-file-line-error',
+            \   '-synctex=1',
+            \   '-interaction=nonstopmode',
+            \ ],
+            \}
 
 let g:vimtex_enabled = 1
 let g:vimtex_view_method = 'zathura'
