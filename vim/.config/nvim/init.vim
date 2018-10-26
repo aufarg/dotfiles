@@ -133,7 +133,7 @@ let g:gutentags_cache_dir = '~/.cache/vim-gutentags'
 set termguicolors
 set background=dark
 
-let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_dark = 'medium'
 colorscheme gruvbox
 hi link EasyMotionTarget EasyMotionTarget2FirstDefault
 
