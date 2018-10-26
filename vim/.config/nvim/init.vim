@@ -113,6 +113,8 @@ map : <Plug>(easymotion-prev)
 let g:signify_vcs_list = [ 'git' ]
 
 " deoplete.nvim configuration
+set completeopt+=noinsert,noselect
+set completeopt-=preview
 let g:deoplete#enable_at_startup = 1
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
