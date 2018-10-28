@@ -222,15 +222,15 @@ if has('cscope')
             set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
         endif
 
-	nnoremap <C-_>s :cs find s <C-R><C-W><CR>
-	nnoremap <C-_>g :cs find g <C-R><C-W><CR>
-	nnoremap <C-_>c :cs find c <C-R><C-W><CR>
-	nnoremap <C-_>t :cs find t <C-R><C-W><CR>
-	nnoremap <C-_>e :cs find e <C-R><C-W><CR>
-	nnoremap <C-_>f :cs find f <C-R><C-F><CR>
-	nnoremap <C-_>i :cs find i ^<C-R><C-F>$<CR>
-	nnoremap <C-_>d :cs find d <C-R><C-W><CR>
-	nnoremap <C-_>a :cs find a <C-R><C-W><CR>
+	nnoremap <Leader>cs :cs find s <C-R><C-W><CR>
+	nnoremap <Leader>cg :cs find g <C-R><C-W><CR>
+	nnoremap <Leader>cc :cs find c <C-R><C-W><CR>
+	nnoremap <Leader>ct :cs find t <C-R><C-W><CR>
+	nnoremap <Leader>ce :cs find e <C-R><C-W><CR>
+	nnoremap <Leader>cf :cs find f <C-R><C-F><CR>
+	nnoremap <Leader>ci :cs find i ^<C-R><C-F>$<CR>
+	nnoremap <Leader>cd :cs find d <C-R><C-W><CR>
+	nnoremap <Leader>ca :cs find a <C-R><C-W><CR>
 endif
 
 
