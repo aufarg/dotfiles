@@ -75,7 +75,7 @@ call denite#custom#map('insert', '<C-s>', '<denite:do_action:splitswitch>', 'nor
 " Search file along this folder
 call denite#custom#var('file/rec', 'command',
             \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-nnoremap <leader>cp :Denite file/rec -updatetime=10<cr>
+nnoremap <leader>pp :Denite file/rec -updatetime=10<cr>
 
 " vimgrep
 call denite#custom#var('grep', 'command', ['ag'])
@@ -85,7 +85,7 @@ call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
-nnoremap <leader>c/ :Denite -updatetime=10 -no-empty grep<cr>
+nnoremap <leader>p/ :Denite -updatetime=10 -no-empty grep<cr>
 
 " Rainbow Parentheses configuration
 let g:rainbow#max_level = 16
