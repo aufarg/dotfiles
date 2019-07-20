@@ -252,14 +252,14 @@ nmap <localleader>b <plug>(tex-bwrap-n)
 vmap <localleader>i <plug>(tex-iwrap-v)
 vmap <localleader>b <plug>(tex-bwrap-v)
 
-" Tagbar
+" tagbar {{{1
 let g:tagbar_left = 1
 nnoremap <silent> <F9> :TagbarToggle<CR>
 
-" vim-rooter
+" vim-rooter {{{1
 let g:rooter_manual_only = 1
 
-" vim-lightline
+" vim-lightline {{{1
 set noshowmode " use the one from lightline
 let g:lightline = {
             \ 'enable': {
