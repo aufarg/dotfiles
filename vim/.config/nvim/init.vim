@@ -320,26 +320,27 @@ augroup lightline_update
     autocmd User GutentagsUpdated call lightline#update()
 augroup END
 
+" cscope {{{1
 if has('cscope')
-	set cscopetag
-	set nocscopeverbose
-	if filereadable('cscope.out')
-		silent! cscope add cscope.out
-	endif
-	set cscopeverbose
+    set cscopetag
+    set nocscopeverbose
+    if filereadable('cscope.out')
+        silent! cscope add cscope.out
+    endif
+    set cscopeverbose
 
-	if has('quickfix')
-            set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
-        endif
+    if has('quickfix')
+        set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
+    endif
 
-	nnoremap <Leader>cs :cs find s <C-R><C-W><CR>
-	nnoremap <Leader>cg :cs find g <C-R><C-W><CR>
-	nnoremap <Leader>cc :cs find c <C-R><C-W><CR>
-	nnoremap <Leader>ct :cs find t <C-R><C-W><CR>
-	nnoremap <Leader>ce :cs find e <C-R><C-W><CR>
-	nnoremap <Leader>cf :cs find f <C-R><C-F><CR>
-	nnoremap <Leader>ci :cs find i ^<C-R><C-F>$<CR>
-	nnoremap <Leader>cd :cs find d <C-R><C-W><CR>
-	nnoremap <Leader>ca :cs find a <C-R><C-W><CR>
+    nnoremap <Leader>cs :cs find s <C-R><C-W><CR>
+    nnoremap <Leader>cg :cs find g <C-R><C-W><CR>
+    nnoremap <Leader>cc :cs find c <C-R><C-W><CR>
+    nnoremap <Leader>ct :cs find t <C-R><C-W><CR>
+    nnoremap <Leader>ce :cs find e <C-R><C-W><CR>
+    nnoremap <Leader>cf :cs find f <C-R><C-F><CR>
+    nnoremap <Leader>ci :cs find i ^<C-R><C-F>$<CR>
+    nnoremap <Leader>cd :cs find d <C-R><C-W><CR>
+    nnoremap <Leader>ca :cs find a <C-R><C-W><CR>
 endif
 
