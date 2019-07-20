@@ -1,4 +1,57 @@
+filetype indent plugin on " determine the type of a file based on its name
+syntax enable             " depends on filetype
+
+set hidden                " allow unsaved buffer to stay until vim closed
+set showcmd               " show currently typed commands on Vim's last line
+set ignorecase smartcase  " use case insensitive search, except when using capital letters
+set copyindent autoindent " copy the previous indentation on autoindenting
+set nostartofline         " stop certain movements from always going to the first character of a line
+set title                 " change the terminal's title
+set nobackup noswapfile   " don't use backup files with ~ and .swp
+set ruler                 " display the cursor position on the buffer
+set cursorline            " highlight line where the current cursor is in
+set confirm               " raise confirmation instead failing unsaved buffer
+set cmdheight=2           " set the command window height to 2 lines
+set relativenumber        " display line relative numbers on the left
+set nowrap                " don't wrap lines
+set notimeout nottimeout  " no time out on keycodes and mappings
+set list                  " show some special char to mark
+set guicursor&            " reset to default neovim value (somehow it was set to nothing by default on st)
+set conceallevel=1        " conceal text with appropriate conceal characeter
+set shortmess+=c
+set foldmethod=marker
+
 let mapleader = ','
+
+" map space to run command fast
+noremap <Space> :
+nnoremap : ,
+
+nnoremap <Leader>l :nohl<CR><C-l>
+nnoremap <Leader>st :tabe $MYVIMRC<CR>
+nnoremap <Leader>sv :vsplit $MYVIMRC<CR>
+nnoremap <Leader>ss :split $MYVIMRC<CR>
+nnoremap <Leader>se :e $MYVIMRC<CR>
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+tnoremap <Esc> <C-\><C-n>
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+
+noremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+cnoremap w!! w !sudo tee % > /dev/null
+
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
 
 " vim-plug
 call plug#begin('~/.cache/nvim-plugins')
@@ -233,55 +286,3 @@ if has('cscope')
 	nnoremap <Leader>ca :cs find a <C-R><C-W><CR>
 endif
 
-
-filetype indent plugin on " determine the type of a file based on its name
-syntax enable             " depends on filetype
-
-set hidden                " allow unsaved buffer to stay until vim closed
-set showcmd               " show currently typed commands on Vim's last line
-set ignorecase smartcase  " use case insensitive search, except when using capital letters
-set copyindent autoindent " copy the previous indentation on autoindenting
-set nostartofline         " stop certain movements from always going to the first character of a line
-set title                 " change the terminal's title
-set nobackup noswapfile   " don't use backup files with ~ and .swp
-set ruler                 " display the cursor position on the buffer
-set cursorline            " highlight line where the current cursor is in
-set confirm               " raise confirmation instead failing unsaved buffer
-set cmdheight=2           " set the command window height to 2 lines
-set relativenumber        " display line relative numbers on the left
-set nowrap                " don't wrap lines
-set notimeout nottimeout  " no time out on keycodes and mappings
-set list                  " show some special char to mark
-set guicursor&            " reset to default neovim value (somehow it was set to nothing by default on st)
-set conceallevel=1        " conceal text with appropriate conceal characeter
-set shortmess+=c
-
-" map space to run command fast
-noremap <Space> :
-nnoremap : ,
-
-nnoremap <Leader>l :nohl<CR><C-l>
-nnoremap <Leader>st :tabe $MYVIMRC<CR>
-nnoremap <Leader>sv :vsplit $MYVIMRC<CR>
-nnoremap <Leader>ss :split $MYVIMRC<CR>
-nnoremap <Leader>se :e $MYVIMRC<CR>
-
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-tnoremap <Esc> <C-\><C-n>
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-
-noremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-cnoremap w!! w !sudo tee % > /dev/null
-
-let g:netrw_banner = 0
-let g:netrw_winsize = 25
