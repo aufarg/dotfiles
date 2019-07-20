@@ -261,39 +261,61 @@ let g:rooter_manual_only = 1
 
 " vim-lightline {{{1
 set noshowmode " use the one from lightline
-let g:lightline = {
-            \ 'enable': {
+
+function! LightlineNeomake()
+    let bufnr = bufnr('%')
+    let running_jobs = filter(copy(neomake#GetJobs()),
+                \ "v:val.bufnr == bufnr  && !get(v:val, 'canceled', 0)")
+    if empty(running_jobs)
+        return '✓'
+    else
+        return '⟳ ' . join(map(running_jobs, 'v:val.name'), ', ')
+    endif
+endfunction
+
+function! LightlineFugitive()
+    return fugitive#head()
+endfunction
+
+function! LightlineGutentags()
+    return gutentags#statusline()
+endfunction
+
+let g:lightline = {}
+let g:lightline.enable = {
             \   'statusline': 1,
-            \   'tabline': 0,
-            \ },
-            \ 'colorscheme': 'wombat',
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'filename', 'readonly', 'modified', 'fugitive',  'gutentags' ] ],
-            \ },
-            \ 'component': {
-            \   'readonly': '%{&filetype=="help"?"":&readonly?"x":""}',
-            \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-            \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-            \ },
-            \ 'component_expand': {
-            \   'gutentags': 'gutentags#statusline'
-            \ },
-            \ 'component_visible_condition': {
-            \   'readonly': '(&filetype!="help"&& &readonly)',
-            \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-            \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
-            \   'gutentags': '(exists("*gutentags#statusline") && gutentags#statusline() != "")',
-            \ },
-            \ 'component_type': {
-            \   'gutentags': 'warning',
-            \ },
-            \ 'separator': { 'left': '', 'right': '' },
-            \ 'subseparator': { 'left': '', 'right': '' },
+            \   'tabline':    0,
             \ }
+
+let g:lightline.colorscheme = 'wombat'
+let g:lightline.active = {
+            \   'left':  [ [ 'mode', 'paste' ],
+            \             [ 'filename', 'readonly', 'modified', ],
+            \             [ 'fugitive',  'neomake' ] ],
+            \   'right': [ [ 'lineinfo' ],
+            \              [ 'percent' ],
+            \              [ 'fileformat', 'fileencoding', 'filetype' ],
+            \              [ 'gutentags' ] ]
+            \ }
+
+let g:lightline.component = {
+            \   'readonly': '%{&filetype == "help" ? "" : &readonly ? "x" :""}',
+            \   'modified': '%{&filetype == "help" ? "" : &modified ? "+" : &modifiable? "" : "-"}',
+            \ }
+
+let  g:lightline.component_expand = {
+            \   'fugitive':  'LightlineFugitive',
+            \   'neomake':   'LightlineNeomake',
+            \   'gutentags': 'LightlineGutentags',
+            \ }
+
+let g:lightline.separator    = { 'left': '', 'right': '' }
+let g:lightline.subseparator = { 'left': '', 'right': '' }
 
 augroup lightline_update
     autocmd!
+    autocmd User NeomakeJobStarted call lightline#update()
+    autocmd User NeomakeJobFinished call lightline#update()
     autocmd User GutentagsUpdating call lightline#update()
     autocmd User GutentagsUpdated call lightline#update()
 augroup END
