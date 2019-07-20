@@ -204,6 +204,16 @@ call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 
 " gutentags {{{1
 let g:gutentags_cache_dir = '~/.cache/vim-gutentags'
+let g:gutentags_exclude = [
+            \ '*.css', '*.html', '*.js', '*.json', '*.xml',
+            \ '*.rst', '*.md',
+            \ ]
+let g:gutentags_file_list_command = {
+            \ 'markers': {
+            \ '.git': 'git ls-files',
+            \ '.hg': 'hg files',
+            \ },
+            \ }
 
 " theme {{{1
 set termguicolors
