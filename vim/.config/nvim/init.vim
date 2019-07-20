@@ -120,10 +120,6 @@ augroup neoformat
     autocmd!
 augroup END
 
-" UltiSnip configuration
-let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
-let g:UltiSnipsSnippetDirectories=[g:UltiSnipsSnippetsDir] + ['UltiSnips']
-
 " denite configuration
 call denite#custom#option('default', 'prompt', '>')
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
@@ -145,6 +141,10 @@ call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
 nnoremap <leader>p/ :Denite -updatetime=10 -no-empty grep<cr>
+
+" UltiSnip configuration
+let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
+let g:UltiSnipsSnippetDirectories = [g:UltiSnipsSnippetsDir] + ['UltiSnips']
 
 " Rainbow Parentheses configuration
 let g:rainbow#max_level = 16
