@@ -92,7 +92,6 @@ Plug 'tpope/vim-surround' " surround command
 " utility
 Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-signify'
-Plug 'Shougo/denite.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
@@ -119,28 +118,6 @@ nnoremap <Leader>pi :PlugInstall<CR>
 augroup neoformat
     autocmd!
 augroup END
-
-" denite configuration
-call denite#custom#option('default', 'prompt', '>')
-call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
-call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
-call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplitswitch>', 'noremap')
-call denite#custom#map('insert', '<C-s>', '<denite:do_action:splitswitch>', 'noremap')
-
-" Search file along this folder
-call denite#custom#var('file/rec', 'command',
-            \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-nnoremap <leader>pp :Denite file/rec -updatetime=10<cr>
-
-" vimgrep
-call denite#custom#var('grep', 'command', ['ag'])
-call denite#custom#var('grep', 'default_opts',
-            \ ['-i', '--vimgrep', '--nocolor', '-o'])
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', [])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'final_opts', [])
-nnoremap <leader>p/ :Denite -updatetime=10 -no-empty grep<cr>
 
 " UltiSnip configuration
 let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
