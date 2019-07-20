@@ -147,6 +147,10 @@ let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 let g:UltiSnipsSnippetDirectories = [g:UltiSnipsSnippetsDir] + ['UltiSnips']
 
 " Rainbow Parentheses configuration
+augroup rainbow_parentheses
+    autocmd FileType * RainbowParentheses
+augroup END
+
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 let g:rainbow#blacklist = [233, 234]
