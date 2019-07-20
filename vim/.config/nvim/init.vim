@@ -254,7 +254,7 @@ vmap <localleader>b <plug>(tex-bwrap-v)
 
 " tagbar {{{1
 let g:tagbar_left = 1
-nnoremap <silent> <F9> :TagbarToggle<CR>
+nnoremap <silent> <F10> :TagbarToggle<CR>
 
 " vim-rooter {{{1
 let g:rooter_manual_only = 1
