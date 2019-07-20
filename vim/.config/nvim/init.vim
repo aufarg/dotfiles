@@ -121,6 +121,40 @@ augroup neoformat
     autocmd!
 augroup END
 
+" neomake {{{1
+call neomake#configure#automake('w')
+let g:neomake_open_list = 2
+let g:neomake_error_sign = { 'text': '✗', 'texthl': 'NeomakeErrorSign' }
+let g:neomake_warning_sign = { 'text': '‼', 'texthl': 'NeomakeWarningSign' }
+let s:options = {
+            \ 'common': [ '-DDEBUG', '-Wall', '-Wextra', '-pedantic', '-std=c++17', '-Wshadow', '-Wfloat-equal', '-Wconversion',
+            \             '-Wlogical-op', '-Wshift-overflow=2', '-Wduplicated-cond', '-Wcast-qual', '-Wcast-align' ]
+            \ }
+
+let g:neomake_cpp_compile_maker = {
+            \ 'exe': 'g++',
+            \ 'args': s:options.common + [ '-ggdb', '-o', 'raw' ],
+            \ }
+
+let g:neomake_cpp_optimize_maker = {
+            \ 'exe': 'g++',
+            \ 'args': s:options.common + [ '-O2', '-o', 'fast' ],
+            \ }
+
+let g:neomake_cpp_sanitize_maker = {
+            \ 'exe': 'g++',
+            \ 'args': s:options.common + ['-D_GLIBCXX_DEBUG', '-D_GLIBCXX_DEBUG_PEDANTIC', '-D_FORTIFY_SOURCE=2',
+            \          '-fsanitize=address', '-fsanitize=undefined', '-fno-sanitize-recover', '-fstack-protector',
+            \          '-O2', '-o', 'sane' ],
+            \ }
+
+let g:neomake_cpp_enabled_makers = ['compile', 'optimize', 'sanitize']
+
+augroup neomake_quickfix
+    autocmd!
+    autocmd QuitPre * if &filetype !=# 'qf' | lclose | endif
+augroup END
+
 " UltiSnip {{{1
 let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 let g:UltiSnipsSnippetDirectories = [g:UltiSnipsSnippetsDir] + ['UltiSnips']
