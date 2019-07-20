@@ -1,3 +1,4 @@
+" config {{{1
 filetype indent plugin on " determine the type of a file based on its name
 syntax enable             " depends on filetype
 
@@ -53,7 +54,7 @@ cnoremap w!! w !sudo tee % > /dev/null
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
 
-" vim-plug
+" vim-plug {{{1
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -63,8 +64,9 @@ endif
 call plug#begin('~/.cache/nvim-plugins')
 Plug 'junegunn/vim-plug'
 
-" c/c++/objc completion
+" completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
+" c/c++/objc completion
 Plug 'Shougo/neoinclude.vim' " source from included file (C/C++)
 
 " haskell completion
@@ -114,16 +116,16 @@ nnoremap <Leader>pU :PlugUpgrade<CR>
 nnoremap <Leader>pc :PlugClean<CR>
 nnoremap <Leader>pi :PlugInstall<CR>
 
-" neoformat
+" neoformat {{{1
 augroup neoformat
     autocmd!
 augroup END
 
-" UltiSnip configuration
+" UltiSnip {{{1
 let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 let g:UltiSnipsSnippetDirectories = [g:UltiSnipsSnippetsDir] + ['UltiSnips']
 
-" Rainbow Parentheses configuration
+" rainbow_parentheses {{{1
 augroup rainbow_parentheses
     autocmd FileType * RainbowParentheses
 augroup END
@@ -132,11 +134,11 @@ let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 let g:rainbow#blacklist = [233, 234]
 
-" vim-easy-align configuration
+" vim-easy-align {{{1
 vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" vim-easymotion configuration
+" vim-easymotion {{{1
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_upper = 1
 let g:EasyMotion_do_mapping = 0
@@ -149,10 +151,10 @@ map s <Plug>(easymotion-s2)
 map ; <Plug>(easymotion-next)
 map : <Plug>(easymotion-prev)
 
-" vim-signify configuration
+" vim-signify {{{1
 let g:signify_vcs_list = [ 'git' ]
 
-" deoplete.nvim configuration
+" deoplete.nvim {{{1
 set completeopt+=noinsert,noselect
 set completeopt-=preview
 let g:deoplete#enable_at_startup = 1
@@ -166,10 +168,10 @@ let g:deoplete#omni#input_patterns = {}
 
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 
-" gutentags
+" gutentags {{{1
 let g:gutentags_cache_dir = '~/.cache/vim-gutentags'
 
-" Theme configuration
+" theme {{{1
 set termguicolors
 set background=dark
 
@@ -177,7 +179,7 @@ let g:gruvbox_contrast_dark = 'medium'
 colorscheme gruvbox
 hi link EasyMotionTarget EasyMotionTarget2FirstDefault
 
-" Vimtex
+" vimtex {{{1
 let g:tex_flavor = 'latex'
 let g:vimtex_compiler_latexmk = {
             \ 'backend' : 'nvim',
