@@ -51,9 +51,6 @@ noremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 
 cnoremap w!! w !sudo tee % > /dev/null
 
-let g:netrw_banner = 0
-let g:netrw_winsize = 25
-
 " vim-plug {{{1
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -97,7 +94,6 @@ Plug 'mhinz/vim-signify'
 Plug 'SirVer/ultisnips'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-repeat'
 Plug 'lervag/vimtex' " latex syntax highlighter
 Plug 'airblade/vim-rooter'
