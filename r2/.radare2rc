@@ -1,5 +1,11 @@
+e asm.lines.right = true
+
 e cfg.fortunes = false
-e asm.linesright = true
+e cfg.newtab = true
+
+e dbg.bep=entry
+
+e search.in = dbg.maps
 
 e scr.color = 3
 eco zenburn
