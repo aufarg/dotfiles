@@ -22,6 +22,8 @@ set conceallevel=1        " conceal text with appropriate conceal characeter
 set shortmess+=c
 set foldmethod=marker
 
+set mouse=nv
+
 let mapleader = ','
 
 " map space to run command fast
