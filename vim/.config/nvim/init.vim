@@ -1,4 +1,8 @@
-" config {{{1
+" Vim Configurations: {{{1
+" ========================
+
+" ------------------------
+" Option: {{{2
 filetype indent plugin on " determine the type of a file based on its name
 syntax enable             " depends on filetype
 
@@ -24,6 +28,8 @@ set foldmethod=marker
 
 set mouse=nv
 
+" ------------------------
+" Mapping: {{{2
 let mapleader = ','
 
 " map space to run command fast
@@ -53,7 +59,11 @@ noremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 
 cnoremap w!! w !sudo tee % > /dev/null
 
-" vim-plug {{{1
+" Plugins Configurations: {{{1
+" ========================
+
+" ------------------------
+" vimplug {{{2
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -114,12 +124,14 @@ nnoremap <Leader>pU :PlugUpgrade<CR>
 nnoremap <Leader>pc :PlugClean<CR>
 nnoremap <Leader>pi :PlugInstall<CR>
 
-" neoformat {{{1
+" ------------------------
+" neoformat {{{2
 augroup neoformat
     autocmd!
 augroup END
 
-" neomake {{{1
+" ------------------------
+" neomake {{{2
 call neomake#configure#automake('w')
 let g:neomake_open_list = 2
 let g:neomake_error_sign = { 'text': '✗', 'texthl': 'NeomakeErrorSign' }
@@ -129,6 +141,8 @@ let s:options = {
             \             '-Wlogical-op', '-Wshift-overflow=2', '-Wduplicated-cond', '-Wcast-qual', '-Wcast-align' ]
             \ }
 
+" ------------------------
+" competitive programming {{{3
 let g:neomake_cpp_compile_maker = {
             \ 'exe': 'g++',
             \ 'args': s:options.common + [ '-ggdb', '-o', 'raw' ],
@@ -153,11 +167,13 @@ augroup neomake_quickfix
     autocmd QuitPre * if &filetype !=# 'qf' | lclose | endif
 augroup END
 
-" UltiSnip {{{1
+" ------------------------
+" UltiSnip {{{2
 let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 let g:UltiSnipsSnippetDirectories = [g:UltiSnipsSnippetsDir] + ['UltiSnips']
 
-" rainbow_parentheses {{{1
+" ------------------------
+" rainbow_parentheses {{{2
 augroup rainbow_parentheses
     autocmd FileType * RainbowParentheses
 augroup END
@@ -166,11 +182,13 @@ let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 let g:rainbow#blacklist = [233, 234]
 
-" vim-easy-align {{{1
+" ------------------------
+" vim-easy-align {{{2
 vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" vim-easymotion {{{1
+" ------------------------
+" vim-easymotion {{{2
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_upper = 1
 let g:EasyMotion_do_mapping = 0
@@ -183,10 +201,12 @@ map s <Plug>(easymotion-s2)
 map ; <Plug>(easymotion-next)
 map : <Plug>(easymotion-prev)
 
-" vim-signify {{{1
+" ------------------------
+" vim-signify {{{2
 let g:signify_vcs_list = [ 'git' ]
 
-" deoplete.nvim {{{1
+" ------------------------
+" deoplete.nvim {{{2
 set completeopt+=noinsert,noselect
 set completeopt-=preview
 let g:deoplete#enable_at_startup = 1
@@ -200,7 +220,8 @@ let g:deoplete#omni#input_patterns = {}
 
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 
-" gutentags {{{1
+" ------------------------
+" gutentags {{{2
 let g:gutentags_cache_dir = '~/.cache/vim-gutentags'
 let g:gutentags_exclude = [
             \ '*.css', '*.html', '*.js', '*.json', '*.xml',
@@ -213,7 +234,8 @@ let g:gutentags_file_list_command = {
             \ },
             \ }
 
-" theme {{{1
+" ------------------------
+" theme {{{2
 set termguicolors
 set background=dark
 
@@ -221,7 +243,8 @@ let g:gruvbox_contrast_dark = 'medium'
 colorscheme gruvbox
 hi link EasyMotionTarget EasyMotionTarget2FirstDefault
 
-" vimtex {{{1
+" ------------------------
+" vimtex {{{2
 let g:tex_conceal = 'abdmg'
 let g:tex_flavor = 'latex'
 let g:vimtex_compiler_latexmk = {
@@ -250,14 +273,17 @@ nmap <localleader>b <plug>(tex-bwrap-n)
 vmap <localleader>i <plug>(tex-iwrap-v)
 vmap <localleader>b <plug>(tex-bwrap-v)
 
-" tagbar {{{1
+" ------------------------
+" tagbar {{{2
 let g:tagbar_left = 1
 nnoremap <silent> <F10> :TagbarToggle<CR>
 
-" vim-rooter {{{1
+" ------------------------
+" vim-rooter {{{2
 let g:rooter_manual_only = 1
 
-" vim-lightline {{{1
+" ------------------------
+" vim-lightline {{{2
 set noshowmode " use the one from lightline
 
 function! LightlineNeomake()
@@ -318,7 +344,8 @@ augroup lightline_update
     autocmd User GutentagsUpdated call lightline#update()
 augroup END
 
-" cscope {{{1
+" ------------------------
+" cscope {{{2
 if has('cscope')
     set cscopetag
     set nocscopeverbose
