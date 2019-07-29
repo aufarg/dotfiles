@@ -21,8 +21,12 @@ set relativenumber        " display line relative numbers on the left
 set nowrap                " don't wrap lines
 set notimeout nottimeout  " no time out on keycodes and mappings
 set list                  " show some special char to mark
+set listchars+=extends:❯  " show markers on the right for trimmed-line when wrap is unset
+set listchars+=precedes:❮ " show markers on the left for trimmed-line when wrap is unset
 set guicursor&            " reset to default neovim value (somehow it was set to nothing by default on st)
 set conceallevel=1        " conceal text with appropriate conceal characeter
+set autowrite
+set autoread
 set shortmess+=c
 set foldmethod=marker
 
@@ -61,6 +65,25 @@ noremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 cnoremap w!! w !sudo tee % > /dev/null
+
+" Autocommand: {{{2
+augroup focus_lost
+    autocmd FocusLost * :silent! wall
+augroup END
+
+augroup cursor_line
+    autocmd!
+    autocmd WinLeave,InsertEnter * set nocursorline
+    autocmd WinEnter,InsertLeave * set cursorline
+augroup END
+
+augroup line_return
+    au!
+    au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     execute 'normal! g`"zvzz' |
+        \ endif
+augroup END
 
 " Plugins Configurations: {{{1
 " ========================
