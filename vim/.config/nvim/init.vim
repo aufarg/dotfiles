@@ -114,7 +114,7 @@ Plug 'lervag/vimtex' " latex syntax highlighter
 Plug 'airblade/vim-rooter'
 
 " themes
-Plug 'flazz/vim-colorschemes'
+Plug 'ayu-theme/ayu-vim'
 Plug 'itchyny/lightline.vim'
 
 " Add plugins to &runtimepath
@@ -240,10 +240,7 @@ let g:gutentags_file_list_command = {
 " ------------------------
 " theme {{{2
 set termguicolors
-set background=dark
-
-let g:gruvbox_contrast_dark = 'medium'
-colorscheme gruvbox
+colorscheme ayu
 hi link EasyMotionTarget EasyMotionTarget2FirstDefault
 
 " ------------------------
