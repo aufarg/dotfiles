@@ -29,8 +29,19 @@ set autowrite
 set autoread
 set shortmess+=c
 set foldmethod=marker
+set tagcase=followscs
+
+set completeopt+=noinsert,noselect
+set completeopt-=preview
 
 set mouse=nv
+
+set path=.
+
+set grepprg=ag\ --vimgrep\ $*
+set grepformat=%f:%l:%c:%m
+
+set termguicolors
 
 " ------------------------
 " Mapping: {{{2
@@ -41,10 +52,11 @@ noremap <Space> :
 nnoremap : ,
 
 nnoremap <Leader>l :nohl<CR><C-l>
-nnoremap <Leader>st :tabe $MYVIMRC<CR>
-nnoremap <Leader>sv :vsplit $MYVIMRC<CR>
-nnoremap <Leader>ss :split $MYVIMRC<CR>
-nnoremap <Leader>se :e $MYVIMRC<CR>
+
+nnoremap <Leader>s :e $MYVIMRC<CR>
+nnoremap <Leader>f :find *
+nnoremap <Leader>b :buf *
+nnoremap <Leader>g :ls<CR>:b<Space>
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -60,21 +72,27 @@ tnoremap <A-j> <C-\><C-n><C-w>j
 tnoremap <A-k> <C-\><C-n><C-w>k
 tnoremap <A-l> <C-\><C-n><C-w>l
 
-noremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+noremap <silent> <F8> :Neomake! test<CR>
+noremap <silent> <F9> :Neomake! build<CR>
+
+noremap <silent> <F12> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
             \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 cnoremap w!! w !sudo tee % > /dev/null
 
+command! Scratch vnew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
+
 " Autocommand: {{{2
 augroup focus_lost
-    autocmd FocusLost * :silent! wall
+    au!
+    au FocusLost * :silent! wall
 augroup END
 
 augroup cursor_line
-    autocmd!
-    autocmd WinLeave,InsertEnter * set nocursorline
-    autocmd WinEnter,InsertLeave * set cursorline
+    au!
+    au WinLeave,InsertEnter * set nocursorline
+    au WinEnter,InsertLeave * set cursorline
 augroup END
 
 augroup line_return
@@ -83,6 +101,11 @@ augroup line_return
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \     execute 'normal! g`"zvzz' |
         \ endif
+augroup END
+
+augroup close_quickfix_on_buffer_close
+    autocmd!
+    autocmd QuitPre * if &filetype !=# 'qf' | lclose | endif
 augroup END
 
 " Plugins Configurations: {{{1
@@ -99,20 +122,13 @@ endif
 call plug#begin('~/.cache/nvim-plugins')
 Plug 'junegunn/vim-plug'
 
-" completion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
-" c/c++/objc completion
-Plug 'Shougo/neoinclude.vim' " source from included file (C/C++)
-
 " haskell completion
-Plug 'eagletmt/neco-ghc'
+Plug 'neovimhaskell/haskell-vim'
 
 " python completion
-Plug 'zchee/deoplete-jedi' " deoplete source for Python
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' } " semantic syntax highlight
 
 " go completion
-Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " code
@@ -137,7 +153,7 @@ Plug 'lervag/vimtex' " latex syntax highlighter
 Plug 'airblade/vim-rooter'
 
 " themes
-Plug 'ayu-theme/ayu-vim'
+Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 
 " Add plugins to &runtimepath
@@ -162,37 +178,38 @@ call neomake#configure#automake('w')
 let g:neomake_open_list = 2
 let g:neomake_error_sign = { 'text': '✗', 'texthl': 'NeomakeErrorSign' }
 let g:neomake_warning_sign = { 'text': '‼', 'texthl': 'NeomakeWarningSign' }
-let s:options = {
+func! Code(ops)
+    execute "Neomake! " . a:ops
+endfunc
+" ------------------------
+" neomake makers: haskell {{{3
+let g:neomake_haskell_enabled_makers = ['liquid']
+let g:neomake_haskell_build_maker = {
+            \ 'exe': 'stack',
+            \ 'args': ['build']
+            \ }
+let g:neomake_haskell_test_maker = {
+            \ 'exe': 'stack',
+            \ 'args': ['test']
+            \ }
+" ------------------------
+" neomake makers: competitive programming {{{3
+let g:neomake_cpp_enabled_makers = ['lint']
+let s:neomake_cpp_maker_options = {
             \ 'common': [ '-DDEBUG', '-Wall', '-Wextra', '-pedantic', '-std=c++17', '-Wshadow', '-Wfloat-equal', '-Wconversion',
             \             '-Wlogical-op', '-Wshift-overflow=2', '-Wduplicated-cond', '-Wcast-qual', '-Wcast-align' ]
             \ }
 
-" ------------------------
-" competitive programming {{{3
+let g:neomake_cpp_lint_maker = {
+            \ 'exe': 'g++',
+            \ 'args': s:neomake_cpp_maker_options.common + [ '-ggdb', '-o', '%' ],
+            \ }
 let g:neomake_cpp_compile_maker = {
             \ 'exe': 'g++',
-            \ 'args': s:options.common + [ '-ggdb', '-o', 'raw' ],
-            \ }
-
-let g:neomake_cpp_optimize_maker = {
-            \ 'exe': 'g++',
-            \ 'args': s:options.common + [ '-O2', '-o', 'fast' ],
-            \ }
-
-let g:neomake_cpp_sanitize_maker = {
-            \ 'exe': 'g++',
-            \ 'args': s:options.common + ['-D_GLIBCXX_DEBUG', '-D_GLIBCXX_DEBUG_PEDANTIC', '-D_FORTIFY_SOURCE=2',
+            \ 'args': s:neomake_cpp_maker_options.common + ['-D_GLIBCXX_DEBUG', '-D_GLIBCXX_DEBUG_PEDANTIC', '-D_FORTIFY_SOURCE=2',
             \          '-fsanitize=address', '-fsanitize=undefined', '-fno-sanitize-recover', '-fstack-protector',
             \          '-O2', '-o', 'sane' ],
             \ }
-
-let g:neomake_cpp_enabled_makers = ['compile', 'optimize', 'sanitize']
-
-augroup neomake_quickfix
-    autocmd!
-    autocmd QuitPre * if &filetype !=# 'qf' | lclose | endif
-augroup END
-
 " ------------------------
 " UltiSnip {{{2
 let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
@@ -232,21 +249,6 @@ map : <Plug>(easymotion-prev)
 let g:signify_vcs_list = [ 'git' ]
 
 " ------------------------
-" deoplete.nvim {{{2
-set completeopt+=noinsert,noselect
-set completeopt-=preview
-let g:deoplete#enable_at_startup = 1
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-    return deoplete#close_popup() . "\<CR>"
-endfunction
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni#input_patterns = {}
-
-
-call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
-
-" ------------------------
 " gutentags {{{2
 let g:gutentags_cache_dir = '~/.cache/vim-gutentags'
 let g:gutentags_exclude = [
@@ -262,8 +264,7 @@ let g:gutentags_file_list_command = {
 
 " ------------------------
 " theme {{{2
-set termguicolors
-colorscheme ayu
+colorscheme onedark
 hi link EasyMotionTarget EasyMotionTarget2FirstDefault
 
 " ------------------------
@@ -334,7 +335,7 @@ let g:lightline.enable = {
             \   'tabline':    0,
             \ }
 
-let g:lightline.colorscheme = 'wombat'
+let g:lightline.colorscheme = 'onedark'
 let g:lightline.active = {
             \   'left':  [ [ 'mode', 'paste' ],
             \             [ 'filename', 'readonly', 'modified', ],
@@ -368,27 +369,3 @@ augroup lightline_update
 augroup END
 
 " ------------------------
-" cscope {{{2
-if has('cscope')
-    set cscopetag
-    set nocscopeverbose
-    if filereadable('cscope.out')
-        silent! cscope add cscope.out
-    endif
-    set cscopeverbose
-
-    if has('quickfix')
-        set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
-    endif
-
-    nnoremap <Leader>cs :cs find s <C-R><C-W><CR>
-    nnoremap <Leader>cg :cs find g <C-R><C-W><CR>
-    nnoremap <Leader>cc :cs find c <C-R><C-W><CR>
-    nnoremap <Leader>ct :cs find t <C-R><C-W><CR>
-    nnoremap <Leader>ce :cs find e <C-R><C-W><CR>
-    nnoremap <Leader>cf :cs find f <C-R><C-F><CR>
-    nnoremap <Leader>ci :cs find i ^<C-R><C-F>$<CR>
-    nnoremap <Leader>cd :cs find d <C-R><C-W><CR>
-    nnoremap <Leader>ca :cs find a <C-R><C-W><CR>
-endif
-
