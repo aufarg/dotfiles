@@ -14,7 +14,7 @@
 [rerere]
 	enabled = true
 [pretty]
-	cs = format:%C(red)%h%C(white) %<(80,trunc)%s %C(yellow)[%<(18,trunc)%an] %C(green)(%cd) %C(yellow)%d%C(reset)
+	cs = format:%C(red)%h %C(white)|%C(white) %<(50,trunc)%s %C(white)| %C(yellow)%<(16,trunc)%an %C(white)| %C(green)(%cd) %C(magenta)%d%C(reset)
 [alias]
 	; display
 	logs = log --pretty=cs --abbrev-commit --date=relative --no-merges
