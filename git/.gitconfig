@@ -13,3 +13,17 @@
 	path = ~/.gitconfig.d/local-config
 [rerere]
 	enabled = true
+[pretty]
+	cs = format:%C(red)%h%C(white) %<(80,trunc)%s %C(yellow)[%<(18,trunc)%an] %C(green)(%cd) %C(yellow)%d%C(reset)
+[alias]
+	; display
+	logs = log --pretty=cs --abbrev-commit --date=relative --no-merges
+	graph = log --graph --pretty=cs --abbrev-commit --date=relative --no-merges
+
+	; operation
+	fixup = "!f() { \
+		TARGET=$(git rev-parse "$1") \
+		git commit --fixup=$TARGET ${@:2} && \
+		EDITOR=true git rebase -i --autostash --autosquash $TARGET^; \
+		}; f"
+	pristine = !git reset --hard @  && git clean -fdx
