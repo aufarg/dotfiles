@@ -11,3 +11,5 @@
 	tool = nvimdiff
 [include]
 	path = ~/.gitconfig.d/local-config
+[rerere]
+	enabled = true
