@@ -149,6 +149,7 @@ Plug 'SirVer/ultisnips'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-eunuch'
 Plug 'lervag/vimtex' " latex syntax highlighter
 Plug 'airblade/vim-rooter'
 
