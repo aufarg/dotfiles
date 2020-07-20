@@ -26,4 +26,4 @@
 		git commit --fixup=$TARGET ${@:2} && \
 		EDITOR=true git rebase -i --autostash --autosquash $TARGET^; \
 		}; f"
-	pristine = !git reset --hard @  && git clean -fdx
+	pristine = !git reset --hard "${1:-@}"  && git clean -fdx
