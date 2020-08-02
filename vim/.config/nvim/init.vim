@@ -44,6 +44,29 @@ set grepformat=%f:%l:%c:%m
 set termguicolors
 
 " ------------------------
+" Function: {{{2
+" functions to edit configuration files
+function! s:configure_ft_plugin(ft)
+    if !empty(a:ft)
+        let type = a:ft
+    elseif !empty(&filetype)
+        let type = &filetype
+    else
+        return
+    endif
+
+    let path = s:config_directory() . '/after/ftplugin/' . type . '.vim'
+    execute 'edit ' . path
+endfunction
+
+function! s:config_directory()
+    return fnamemodify(expand($MYVIMRC), ':h')
+endfunction
+
+function! s:configure_vimrc()
+    execute 'edit $MYVIMRC'
+endfunction
+
 " Mapping: {{{2
 let mapleader = ','
 
@@ -52,8 +75,6 @@ noremap <Space> :
 nnoremap : ,
 
 nnoremap <Leader>l :nohl<CR><C-l>
-
-nnoremap <Leader>s :e $MYVIMRC<CR>
 nnoremap <Leader>f :find *
 nnoremap <Leader>b :buf *
 nnoremap <Leader>g :ls<CR>:b<Space>
@@ -81,8 +102,16 @@ noremap <silent> <F12> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name
 
 cnoremap w!! w !sudo tee % > /dev/null
 
+" Command: {{{2
+
 command! Scratch vnew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
 
+" edit configuration files
+command! -nargs=? Eft call s:configure_ft_plugin(<q-args>)
+command! Erc call s:configure_vimrc()
+
+
+" ------------------------
 " Autocommand: {{{2
 augroup focus_lost
     au!
