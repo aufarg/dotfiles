@@ -25,6 +25,8 @@ set listchars+=extends:❯  " show markers on the right for trimmed-line when wr
 set listchars+=precedes:❮ " show markers on the left for trimmed-line when wrap is unset
 set guicursor&            " reset to default neovim value (somehow it was set to nothing by default on st)
 set conceallevel=1        " conceal text with appropriate conceal characeter
+set scrolloff=4           " minimum number of lines above and below the cursor (start and end line excluded)
+set sidescrolloff=8       " minimum number of columns left and right the cursor (start and end column excluded)
 set autowrite
 set autoread
 set shortmess+=c
