@@ -150,6 +150,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-unimpaired'
 Plug 'lervag/vimtex' " latex syntax highlighter
 Plug 'airblade/vim-rooter'
 
