@@ -104,6 +104,12 @@ noremap <silent> <F12> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name
 
 cnoremap w!! w !sudo tee % > /dev/null
 
+" vim-lsp mapping
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 " Command: {{{2
 
 command! Scratch vnew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
@@ -188,6 +194,8 @@ Plug 'airblade/vim-rooter'
 " themes
 Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
+
+Plug 'neovim/nvim-lsp'
 
 " Add plugins to &runtimepath
 call plug#end()
