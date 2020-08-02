@@ -214,6 +214,7 @@ let g:neomake_cpp_compile_maker = {
             \ }
 " ------------------------
 " UltiSnip {{{2
+let g:UltiSnipsExpandTrigger = "<C-Space>"
 let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 let g:UltiSnipsSnippetDirectories = [g:UltiSnipsSnippetsDir] + ['UltiSnips']
 
