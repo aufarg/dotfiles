@@ -385,10 +385,15 @@ augroup END
 lua << EOF
 local lspconfig = require('lspconfig')
 
+-- C/C++
+lspconfig.clangd.setup{}
+
+-- Haskell
 lspconfig.hls.setup{
   filetypes = { 'haskell', 'lhaskell', 'cabal' },
 }
 
+-- LaTeX
 lspconfig.texlab.setup{}
 
 -- Global mappings.
