@@ -171,7 +171,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " code
 Plug 'neomake/neomake'
 Plug 'sbdchd/neoformat'
-Plug 'ludovicchabant/vim-gutentags' " auto (re)generate ctag file
 Plug 'junegunn/rainbow_parentheses.vim' " colorize parentheses
 Plug 'Raimondi/delimitMate' " autocomplete brackets, parentheses
 Plug 'majutsushi/tagbar' " taglist browser for many different languages
@@ -291,19 +290,6 @@ map : <Plug>(easymotion-prev)
 let g:signify_vcs_list = [ 'git' ]
 
 " ------------------------
-" gutentags {{{2
-let g:gutentags_cache_dir = '~/.cache/vim-gutentags'
-let g:gutentags_exclude = [
-            \ '*.css', '*.html', '*.js', '*.json', '*.xml',
-            \ '*.rst', '*.md',
-            \ ]
-let g:gutentags_file_list_command = {
-            \ 'markers': {
-            \ '.git': 'git ls-files',
-            \ '.hg': 'hg files',
-            \ },
-            \ }
-
 " ------------------------
 " theme {{{2
 colorscheme onedark
@@ -367,10 +353,6 @@ function! LightlineFugitive()
     return fugitive#head()
 endfunction
 
-function! LightlineGutentags()
-    return gutentags#statusline()
-endfunction
-
 let g:lightline = {}
 let g:lightline.enable = {
             \   'statusline': 1,
@@ -384,8 +366,7 @@ let g:lightline.active = {
             \             [ 'fugitive',  'neomake' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
-            \              [ 'fileformat', 'fileencoding', 'filetype' ],
-            \              [ 'gutentags' ] ]
+            \              [ 'fileformat', 'fileencoding', 'filetype' ] ],
             \ }
 
 let g:lightline.component = {
@@ -396,7 +377,6 @@ let g:lightline.component = {
 let  g:lightline.component_expand = {
             \   'fugitive':  'LightlineFugitive',
             \   'neomake':   'LightlineNeomake',
-            \   'gutentags': 'LightlineGutentags',
             \ }
 
 let g:lightline.separator    = { 'left': '', 'right': '' }
@@ -406,8 +386,6 @@ augroup lightline_update
     autocmd!
     autocmd User NeomakeJobStarted call lightline#update()
     autocmd User NeomakeJobFinished call lightline#update()
-    autocmd User GutentagsUpdating call lightline#update()
-    autocmd User GutentagsUpdated call lightline#update()
 augroup END
 
 " ------------------------
