@@ -104,12 +104,6 @@ noremap <silent> <F12> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name
 
 cnoremap w!! w !sudo tee % > /dev/null
 
-" vim-lsp mapping
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 " Command: {{{2
 
 command! Scratch vnew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
@@ -191,7 +185,7 @@ Plug 'airblade/vim-rooter'
 Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 
-Plug 'neovim/nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -386,3 +380,46 @@ augroup lightline_update
 augroup END
 
 " ------------------------
+" nvim-lspconfig {{{2
+
+lua << EOF
+local lspconfig = require('lspconfig')
+
+lspconfig.hls.setup{
+  filetypes = { 'haskell', 'lhaskell', 'cabal' },
+}
+
+lspconfig.texlab.setup{}
+
+-- Global mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<Leader>q', vim.diagnostic.setloclist)
+
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<Leader>cd', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<Leader>cr', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<Leader>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<Leader>f', function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
+  end,
+})
+EOF
