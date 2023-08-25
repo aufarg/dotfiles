@@ -162,9 +162,6 @@ Plug 'junegunn/vim-plug'
 " haskell completion
 Plug 'neovimhaskell/haskell-vim'
 
-" python completion
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' } " semantic syntax highlight
-
 " go completion
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
