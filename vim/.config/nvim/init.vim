@@ -183,6 +183,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 
 Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -376,11 +377,12 @@ augroup lightline_update
     autocmd User NeomakeJobFinished call lightline#update()
 augroup END
 
-" ------------------------
-" nvim-lspconfig {{{2
+
+" Languages Configurations: {{{1
 
 lua << EOF
 local lspconfig = require('lspconfig')
+local treesitter = require('nvim-treesitter.configs')
 
 -- C/C++
 lspconfig.clangd.setup{}
@@ -430,4 +432,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
   end,
 })
+
+-- Treesitter
+treesitter.setup {
+    highlight = {
+        enable = true,
+    }
+}
 EOF
