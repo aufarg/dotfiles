@@ -156,9 +156,6 @@ Plug 'junegunn/vim-plug'
 " haskell completion
 Plug 'neovimhaskell/haskell-vim'
 
-" go completion
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
 " code
 Plug 'neomake/neomake'
 Plug 'sbdchd/neoformat'
@@ -388,6 +385,9 @@ local lspconfig = require('lspconfig')
 -- C/C++
 lspconfig.clangd.setup{}
 
+-- Go
+lspconfig.gopls.setup{}
+
 -- Haskell
 lspconfig.hls.setup{
   filetypes = { 'haskell', 'lhaskell', 'cabal' },
@@ -395,13 +395,6 @@ lspconfig.hls.setup{
 
 -- LaTeX
 lspconfig.texlab.setup{}
-
--- Global mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<Leader>q', vim.diagnostic.setloclist)
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -414,17 +407,27 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+
+    -- Navigation & Informations
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<Leader>cd', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<Leader>cr', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<Leader>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<Leader>f', function()
+    vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, opts)
+
+    -- Functions
+    vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<F3>', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<F4>', function()
       vim.lsp.buf.format { async = true }
     end, opts)
+
+    -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+    vim.keymap.set('n', 'gl', vim.diagnostic.open_float)
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
   end,
 })
 EOF
