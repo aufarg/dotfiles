@@ -44,6 +44,7 @@ vim.opt.grepprg         = 'ag --vimgrep $*'
 vim.opt.grepformat      = '%f:%l:%c:%m'
 
 vim.opt.termguicolors   = true
+vim.opt.mmp             = 10000
 
 ---------------------------
 -- Function: {{{2
@@ -53,7 +54,7 @@ local get_vimrc_path = function()
 end
 
 local get_config_directory = function()
-    return vim.fn.fnamemodify(vim.fn.expand(get_vimrc_path(), ':h'))
+    return vim.fn.fnamemodify(vim.fn.expand(get_vimrc_path()), ':h')
 end
 
 edit_vimrc = function()
@@ -62,15 +63,16 @@ end
 
 edit_ftplugin = function(ft)
   local optft = vim.opt.filetype:get()
+  local type
   if ft ~= nil then
-      local type = ft
+      type = ft
   elseif optft ~= nil then
-      local type = optft
+      type = optft
   else
       return
   end
 
-  local path = vim.fs.joinpath(get_config_directory(), '/after/ftplugin/', type, '.vim')
+  local path = vim.fs.joinpath(get_config_directory(), '/after/ftplugin/', type .. '.lua')
   vim.cmd.edit(path)
 end
 
@@ -216,12 +218,20 @@ Plug 'tpope/vim-unimpaired'
 Plug 'lervag/vimtex'                    -- latex syntax highlighter
 Plug 'airblade/vim-rooter'
 
+Plug 'dhruvasagar/vim-table-mode'
+
+-- fugitive helper
+Plug 'shumphrey/fugitive-gitlab.vim'
+
 -- themes
 Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 
 Plug 'neovim/nvim-lspconfig'
--- Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
+Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
+
+Plug('sourcegraph/sg.nvim', { ['do'] = 'nvim -l build/init.lua' })
+Plug 'nvim-lua/plenary.nvim'
 vim.fn['plug#end']()
 
 vim.keymap.set('n', '<Leader>pu', '<cmd>PlugUpdate<CR>')
@@ -330,9 +340,11 @@ augroup lightline_update
 augroup END
 ]])
 
+-- SourceGraph
+require('sg').setup{}
+
 -- Language Configurations
 local lspconfig = require('lspconfig')
-local treesitter = require('nvim-treesitter.configs')
 
 -- C/C++
 lspconfig.clangd.setup{}
@@ -347,6 +359,17 @@ lspconfig.hls.setup{
 
 -- LaTeX
 lspconfig.texlab.setup{}
+
+-- Lua
+lspconfig.lua_ls.setup{}
+
+-- Kotlin
+-- lspconfig.kotlin_language_server.setup{
+-- cmd = {"/Users/aufar.gilbran/src/github.com/fwcd/kotlin-language-server/server/build/install/server/bin/kotlin-language-server"}
+-- }
+
+-- Python
+lspconfig.pyright.setup{}
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -384,7 +407,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- Treesitter
-treesitter.setup {
+require('nvim-treesitter.configs').setup {
     highlight = {
         enable = true,
     },
