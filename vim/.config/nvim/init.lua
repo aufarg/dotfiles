@@ -2,7 +2,7 @@
 -- ========================
 
 --------------------------
--- Option: {{{2
+-- Option {{{2
 vim.opt.hidden          = true       -- allow unsaved buffer to stay until vim closed
 vim.opt.showcmd         = true       -- show currently typed commands on Vim's last line
 vim.opt.ignorecase      = true       -- use case insensitive search, except when using capital letters
@@ -47,7 +47,7 @@ vim.opt.termguicolors   = true
 vim.opt.mmp             = 10000
 
 ---------------------------
--- Function: {{{2
+-- Function {{{2
 -- functions to edit configuration files
 local get_vimrc_path = function()
   return vim.env.MYVIMRC
@@ -76,7 +76,7 @@ edit_ftplugin = function(ft)
   vim.cmd.edit(path)
 end
 
--- Mapping
+-- Mapping {{{2
 vim.g.mapleader = ','
 vim.keymap.set('n', '<Space>', ':')
 vim.keymap.set('n', ':', ',')
@@ -84,7 +84,7 @@ vim.keymap.set('n', ':', ',')
 vim.keymap.set('n', '<Leader>l', ':nohl<CR><C-l>')
 vim.keymap.set('n', '<Leader>f', ':find *')
 vim.keymap.set('n', '<Leader>b', ':buf *')
-vim.keymap.set('n', '<Leader>g', ':ls<CR>:b<Space>')
+-- vim.keymap.set('n', '<Leader>g', ':ls<CR>:b<Space>')
 
 vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-j>', '<C-w>j')
@@ -107,11 +107,10 @@ vim.keymap.set('n', 'N', 'Nzvzz')
 -- 
 -- cnoremap w!! w !sudo tee % > /dev/null
 
--- Command: {{{2
+-- Command {{{2
 
 -- vim.api.nvim_create_user_command('Scratch', 'vnew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile', { force = true })
 -- command! Scratch vnew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
-
 
 open_scratch = function()
   local buf = vim.api.nvim_create_buf(false, true)
@@ -121,23 +120,33 @@ open_scratch = function()
   })
 end
 
+-- Grep {{{2
+vim.keymap.set('ca', 'grep', function()
+  return ((vim.fn['getcmdtype']() == ':' and vim.fn['getcmdline']() == 'grep') and 'silent grep!') or 'grep'
+end , { expr = true })
+
+-- Auto-open QF window
+vim.api.nvim_create_autocmd({'QuickFixCmdPost'}, {
+  group = vim.api.nvim_create_augroup('quickfix', { clear = true }),
+  pattern = '[^l]*',
+  callback = function(ev)
+    vim.cmd.cwindow()
+  end
+})
 
 -- edit configuration files
 -- command! -nargs=? Eft call s:configure_ft_plugin(<q-args>)
 -- command! Erc call s:configure_vimrc()
 
--- Autocommand: {{{2
-do
-  local group = vim.api.nvim_create_augroup('focus_lost', {})
-  vim.api.nvim_create_autocmd({'FileType'}, {
-    group = group,
-    pattern = '*',
-    command = ':silent! wall'
-  })
-end
+-- Autocommand {{{2
+vim.api.nvim_create_autocmd({'FocusLost'}, {
+  group = vim.api.nvim_create_augroup('SaveOnFocusLost', {}),
+  pattern = '*',
+  command = ':silent! wall'
+})
 
 do
-  local group = vim.api.nvim_create_augroup('cursor_line', {})
+  local group = vim.api.nvim_create_augroup('ToggleCursorLineOnWindowChange', {})
   vim.api.nvim_create_autocmd({'WinLeave', 'InsertEnter'}, {
     group = group,
     pattern = '*',
@@ -150,29 +159,23 @@ do
   })
 end
 
-do
-  local group = vim.api.nvim_create_augroup('line_return', {})
-  vim.api.nvim_create_autocmd({'BufReadPost'}, {
-    group = group,
-    pattern = '*',
-    callback = function(ev)
-      vim.cmd('normal! g`"zvzz')
-    end
-  })
-end
+vim.api.nvim_create_autocmd({'BufReadPost'}, {
+  group = vim.api.nvim_create_augroup('CenterLastOpenedLine', {}),
+  pattern = '*',
+  callback = function(ev)
+    vim.cmd.normal { args = {'g`"zvzz'}, bang = true }
+  end
+})
 
-do
-  local group = vim.api.nvim_create_augroup('close_quickfix_on_buffer_close', {})
-  vim.api.nvim_create_autocmd({'QuitPre'}, {
-    group = group,
-    pattern = '*',
-    callback = function(ev)
-      if vim.opt.filetype:get() == 'qf' then
-        vim.cmd('lclose')
-      end
+vim.api.nvim_create_autocmd({'QuitPre'}, {
+  group = vim.api.nvim_create_augroup('CloseQFOnQuit', {}),
+  pattern = '*',
+  callback = function(ev)
+    if vim.opt.filetype:get() == 'qf' then
+      vim.cmd.lclose()
     end
-  })
-end
+  end
+})
 
 -- Plugins Configurations
 -- vim-plug
@@ -241,7 +244,7 @@ vim.keymap.set('n', '<Leader>pi', '<cmd>PlugInstall<CR>')
 
 -- rainbow_parentheses {{{2
 do
-  local group = vim.api.nvim_create_augroup('rainbow_parentheses', {})
+  local group = vim.api.nvim_create_augroup('EnableRainbowParentheses', {})
   vim.api.nvim_create_autocmd({'FileType'}, {
     group = group,
     pattern = '*',
@@ -360,8 +363,38 @@ lspconfig.hls.setup{
 -- LaTeX
 lspconfig.texlab.setup{}
 
--- Lua
-lspconfig.lua_ls.setup{}
+-- Lua (Neovim setup)
+lspconfig.lua_ls.setup{
+  on_init = function(client)
+    local path = client.workspace_folders[1].name
+    if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+      return
+    end
+
+    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+      runtime = {
+        -- Tell the language server which version of Lua you're using
+        -- (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT'
+      },
+      -- Make the server aware of Neovim runtime files
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME
+          -- Depending on the usage, you might want to add additional paths here.
+          -- "${3rd}/luv/library"
+          -- "${3rd}/busted/library",
+        }
+        -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+        -- library = vim.api.nvim_get_runtime_file("", true)
+      }
+    })
+  end,
+  settings = {
+    Lua = {}
+  }
+}
 
 -- Kotlin
 -- lspconfig.kotlin_language_server.setup{
@@ -385,12 +418,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Navigation & Informations
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<Leader>cd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', '<Leader>cD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', '<Leader>ci', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<Leader>ct', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<Leader>cr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<Leader>cs', vim.lsp.buf.signature_help, opts)
 
     -- Functions
     vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
@@ -400,9 +433,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
 
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-    vim.keymap.set('n', 'gl', vim.diagnostic.open_float)
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+    vim.keymap.set('n', '<Leader>dO', vim.diagnostic.open_float)
+    vim.keymap.set('n', '<Leader>dp', vim.diagnostic.goto_prev)
+    vim.keymap.set('n', '<Leader>dn', vim.diagnostic.goto_next)
   end,
 })
 
