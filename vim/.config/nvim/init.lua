@@ -38,7 +38,7 @@ vim.opt.completeopt:remove {'preview'}
 
 vim.opt.mouse           = 'nv'
 
-vim.opt.path            = '.'
+vim.opt.path            = '.,**'
 
 vim.opt.grepprg         = 'ag --vimgrep $*'
 vim.opt.grepformat      = '%f:%l:%c:%m'
@@ -78,7 +78,7 @@ end
 
 -- Mapping {{{2
 vim.g.mapleader = ','
-vim.keymap.set('n', '<Space>', ':')
+vim.keymap.set('', '<Space>', ':')
 vim.keymap.set('n', ':', ',')
 
 vim.keymap.set('n', '<Leader>l', ':nohl<CR><C-l>')
@@ -163,7 +163,7 @@ vim.api.nvim_create_autocmd({'BufReadPost'}, {
   group = vim.api.nvim_create_augroup('CenterLastOpenedLine', {}),
   pattern = '*',
   callback = function(ev)
-    vim.cmd.normal { args = {'g`"zvzz'}, bang = true }
+    -- vim.cmd.normal { args = {'g`"zvzz'}, bang = true }
   end
 })
 
@@ -190,14 +190,25 @@ do
   end
 end
 
+vim.cmd.packadd('cfilter')
+vim.cmd.packadd('gitlab.vim')
+
+require('gitlab').setup({
+  gitlab_url = 'https://gitlab.myteksi.net',
+  resource_editing = {
+    enabled = true,
+  }
+})
+
+
 local Plug = vim.fn['plug#']
 
 vim.fn['plug#begin']('~/.cache/nvim-plugins')
 
 Plug 'junegunn/vim-plug'
 
--- haskell completion
 Plug 'neovimhaskell/haskell-vim'
+Plug 'towolf/vim-helm'
 
 -- code
 Plug 'neomake/neomake'
@@ -210,7 +221,6 @@ Plug 'tpope/vim-commentary'             -- comments with gc<movement>
 Plug 'tpope/vim-surround'               -- surround command
 
 -- utility
-Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-signify'
 Plug 'SirVer/ultisnips'
 Plug 'junegunn/vim-easy-align'
@@ -263,18 +273,6 @@ vim.g.rainbow = {
 vim.keymap.set('v', '<Enter>', '<Plug>(EasyAlign)')
 vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)')
 
--- vim-easymotion {{{2
-vim.g.EasyMotion_smartcase  = 1
-vim.g.EasyMotion_use_upper  = 1
-vim.g.EasyMotion_do_mapping = 0
-vim.g.EasyMotion_keys       = 'hjklyuiopnm,qweasdzxcrtfgvb;r'
-vim.keymap.set('n', 'f', '<Plug>(easymotion-fl)')
-vim.keymap.set('n', 'F', '<Plug>(easymotion-Fl)')
-vim.keymap.set('n', 't', '<Plug>(easymotion-tl)')
-vim.keymap.set('n', 'T', '<Plug>(easymotion-Tl)')
-vim.keymap.set('n', 's', '<Plug>(easymotion-s2)')
-vim.keymap.set('n', ';', '<Plug>(easymotion-next)')
-vim.keymap.set('n', ':', '<Plug>(easymotion-prev)')
 
 -- vim-signify {{{2
 vim.g.signify_vcs_list = {'git'}
@@ -287,6 +285,9 @@ hi link EasyMotionTarget EasyMotionTarget2FirstDefault
 
 -- vim-rooter {{{2
 vim.g.rooter_manual_only = 1
+
+-- fugitive-gitlab
+vim.g.fugitive_gitlab_domains = {'https://gitlab.myteksi.net'}
 
 -- vim-lightline {{{2
 vim.cmd([[
@@ -344,7 +345,7 @@ augroup END
 ]])
 
 -- SourceGraph
-require('sg').setup{}
+-- require('sg').setup{}
 
 -- Language Configurations
 local lspconfig = require('lspconfig')
@@ -352,6 +353,9 @@ local lspconfig = require('lspconfig')
 -- C/C++
 lspconfig.clangd.setup{}
 
+-- GitLab CI
+-- lspconfig.gitlab_ci_ls.setup{}
+--
 -- Go
 lspconfig.gopls.setup{}
 
@@ -359,6 +363,9 @@ lspconfig.gopls.setup{}
 lspconfig.hls.setup{
   filetypes = { 'haskell', 'lhaskell', 'cabal' },
 }
+
+-- Helm
+lspconfig.helm_ls.setup{}
 
 -- LaTeX
 lspconfig.texlab.setup{}
@@ -397,12 +404,18 @@ lspconfig.lua_ls.setup{
 }
 
 -- Kotlin
--- lspconfig.kotlin_language_server.setup{
--- cmd = {"/Users/aufar.gilbran/src/github.com/fwcd/kotlin-language-server/server/build/install/server/bin/kotlin-language-server"}
--- }
+lspconfig.kotlin_language_server.setup{
+  cmd = {"/Users/aufar.gilbran/src/github.com/fwcd/kotlin-language-server/server/build/install/server/bin/kotlin-language-server"}
+}
 
 -- Python
 lspconfig.pyright.setup{}
+
+-- Terraform
+lspconfig.terraformls.setup{}
+
+-- Typescript
+lspconfig.tsserver.setup{}
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
